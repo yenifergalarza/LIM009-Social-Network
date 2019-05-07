@@ -14,7 +14,7 @@ const docRef = firestore.doc("/datos/hk0ufzAKBKGUXiWFUM3I");
 
 
 
-const inputEmail = document.querySelector("#email-signin");
+const inputEmail = document.querySelector("#commentary");
 const buttonRegister = document.querySelector("#button-register");
 const imprime = document.getElementById("imprime")
 buttonRegister.addEventListener("click",function(){
