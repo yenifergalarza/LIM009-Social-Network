@@ -18,7 +18,7 @@ export const printInfoUser = (result) => {
   if (user.photoURL) {
     div.innerHTML = `
         <p>Welcome </p>
-        ${user.displayName} <img src=${user.photoURL}>
+        ${user.displayName} <img src=${user.photoURL} id="userFile">
         ${buttonOut}
         `;
   } else {

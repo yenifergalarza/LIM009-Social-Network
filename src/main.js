@@ -7,7 +7,7 @@ const initFirebase = () => {
     authDomain: "fir-basics-c204d.firebaseapp.com",
     databaseURL: "https://fir-basics-c204d.firebaseio.com",
     projectId: "fir-basics-c204d",
-    storageBucket: "fir-basics-c204d.appspot.com",
+    storageBucket: "gs://fir-basics-c204d.appspot.com/",
     messagingSenderId: "582126712915"
   };
   firebase.initializeApp(config);
