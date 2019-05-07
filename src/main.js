@@ -1,5 +1,5 @@
-import { screen1 } from './ui/login.js'
 import { initRoute } from './routes.js'
+
 // Initialize Firebase
 const initFirebase = () => {
   const config = {
@@ -15,7 +15,6 @@ const initFirebase = () => {
 
 window.addEventListener('load', () => {
   initFirebase();
-  screen1();
   initRoute();
 });
 

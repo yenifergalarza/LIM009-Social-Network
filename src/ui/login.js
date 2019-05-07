@@ -1,10 +1,9 @@
-import { clickRegister } from './register.js'
-import { loginButtons } from '../lib/view-controllers/controller-view-auth.js'
+import { login, googleLogin, facebookLogin, active } from '../lib/view-controllers/auth.js'
 
-export const main = document.getElementById('main');
 
-export const screen1 = () => {
-    const back1 = `  
+export const Login = () => {
+  const div = document.createElement('div')
+  const back1 = `  
     <div class="container container-bg">
       <img  class="someBg" src="assets/18984.jpg" alt="Some bg">
     </div>
@@ -16,8 +15,8 @@ export const screen1 = () => {
       <div class="one-column">
         <input id="email-login" type="email" placeholder="Email" class="input-text" />
         <input id="password-login" type="password" placeholder="Password" class="input-text" />
-        <button type="button" id="button-login-email" class="button-pass"> Log in </button>
-        <p></p>
+        <p class="error-message"></p>
+        <button type="button" href="#/content" id="button-login-email" class="button-pass"> Log in </button>
       </div>
   
       <p class="fs-20 px-15">O bien ingresa con...</p>
@@ -28,27 +27,21 @@ export const screen1 = () => {
       <a href="#/register" id="showRegister">Registrate</a> </div> 
   
     </div>
-  `
-    const div = document.createElement('div')
-    div.className = 'fluid-flex';
-    div.innerHTML = back1;
-    main.innerHTML = ''
-    main.appendChild(div);
-    loginButtons();
-    clickRegister();
-  };
+  `;
+  div.className = 'fluid-flex';
+  div.innerHTML = back1;
 
-  export const ShowErrorMessaggeDom = (error) => {
-    // if (error) {
-    document.getElementsByClassName('input-text').className += ' error-message';
-    const column = document.querySelector('.one-column');
-   const pStatic = document.getElementsByTagName('p')[0];
-    const pError = document.createElement('p');
-    column.replaceChild(pError,pStatic);
-    pError.className = 'error-message';
-    pError.innerHTML = ` ` ;
-    pError.innerHTML = `${error.message}`;
-    column.appendChild(pError);
-    // }
-}
-  
+  const buttonLogInEmail = div.querySelector('#button-login-email');
+  buttonLogInEmail.addEventListener('click', login);
+
+  const gmailLogin = div.querySelector('#google-login');
+  gmailLogin.addEventListener('click', googleLogin);
+
+  const fbLogin = div.querySelector('#fb-login');
+  fbLogin.addEventListener('click', facebookLogin);
+
+  active()
+
+  return div
+};
+

@@ -10,7 +10,7 @@ mockauth.autoFlush();
 // import MockFirebase from '../_mocks_/firebase-mock.js';
 // global.firebase = MockFirebase();
 
-import { funcLogin } from "../src/mvc-architecture/lib/controller-firebase/controller-firebase-auth.js";
+import { funcLogin } from "../src/lib/controller-firebase/auth.js";
 
 describe('funcLogin', () => {
   it('deberia retornar el email: abc@gmail.com', () => {
@@ -20,3 +20,5 @@ describe('funcLogin', () => {
       });
   });
 });
+
+
