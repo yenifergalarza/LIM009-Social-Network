@@ -19,3 +19,5 @@ export const funcFacebook = () => {
 export const signOut = () => firebase.auth().signOut();
 
 export const activeUser = (cb) => firebase.auth().onAuthStateChanged(cb)
+
+export const currentUser = () => firebase.auth().currentUser
