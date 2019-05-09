@@ -19,3 +19,20 @@ export const getRealTimeData = (cb) => {
   const usersDoc = firestore.doc(`users/info`)
   usersDoc.onSnapshot(cb)
 }
+
+export const addPost = (cb) => {
+  const firestore = firebase.firestore();
+  // Add a new document with a generated id.
+  const addDoc = firestore.collection('posts')
+  addDoc.add(cb)
+  .then(ref => {
+    console.log('Added document with ID: ', ref.id);
+  })
+
+}
+
+export const getRealTimePost = (cb) => {
+  const firestore = firebase.firestore();
+  const queryPost = firestore.collection('posts').where('valor', '>=', 5);
+  queryPost.onSnapshot(cb)
+}
