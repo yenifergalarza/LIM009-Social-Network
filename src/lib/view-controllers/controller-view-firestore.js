@@ -17,7 +17,7 @@ const docRef = firestore.doc("/datos/hk0ufzAKBKGUXiWFUM3I");
 const inputEmail = document.querySelector("#commentary");
 const buttonRegister = document.querySelector("#button-register");
 const imprime = document.getElementById("imprime")
-buttonRegister.addEventListener("click",function(){
+/* buttonRegister.addEventListener("click",function(){
     const valueEmail = inputEmail.value;
     docRef.set({
        users:valueEmail
@@ -27,7 +27,7 @@ buttonRegister.addEventListener("click",function(){
         console.log("got an error");
         
     });
-});
+}); */
 
 imprime.addEventListener("click",function(){
     docRef.get().then(function(doc){

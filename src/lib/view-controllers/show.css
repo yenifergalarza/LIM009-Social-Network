@@ -1,0 +1,265 @@
+*{
+    color: #606060;
+    margin: 0;
+    padding: 0;
+}
+
+.white{
+    color:#fafafa
+}
+.nav {
+
+    background-image: linear-gradient(to right, #ffd255, #ffd255, #ffd255,#f08737, #ef8636);
+    height: 50px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.51);
+
+}.nav-content {
+
+    width: 67%;
+    justify-content: space-between;
+    display: flex;
+    line-height: -moz-block-height;
+
+}
+.container {
+
+    background-color: #f7f7f7;
+    padding: 2%;
+        padding-right: 2%;
+        padding-left: 2%;
+    padding-right: 2%;
+    padding-left: 2%;
+    padding-right: 6%;
+    padding-left: 6%;
+    background-image: url(/src/assets/buildings.png);
+    background-blend-mode: luminosity;
+
+}
+.user-photo{
+    height: 100px;
+    border-radius: 50%;
+    width: 100px
+}
+
+.container-user{
+    display: flex;
+    padding: 3%;
+    
+}
+
+.text-user{
+text-align: left;
+   position: relative;
+   width: 90%;
+   padding: 6%;
+}
+
+.edit-post {
+    height: 153px;
+    padding: 5%;
+
+}
+
+.write-post {
+
+    position: relative;
+    width: 100%;
+    height: 60%;
+    resize: none;
+    border-radius: 3px;
+    text-align: center;
+    border: solid 1px #c6c6c6;
+    
+    background: #f2f2f2;
+
+}
+.click{
+    border: none;
+    padding: 8px;
+    padding: 2px;
+}
+.button-icon{
+    background-size: 25px 25px;
+    height: 40px;
+    width: 40px;
+    background-repeat: no-repeat;
+    background-color:#ffd255;
+    background-position: center;
+    border-radius: 72%;
+}
+.button-photo{    background-image: url("/src/assets/picture.png");
+
+}
+
+.button-share {
+    padding: 3%;
+    background-color:#ffd255;
+    border-radius: 16px;
+    position: relative;
+
+}
+.container-click {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3.5%;
+}
+
+.post {
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2%;
+    margin-top: 3%;
+    margin-bottom: 7%;
+    background: #fffdfd;
+    border-color: #e6e6e6;
+
+}
+.button-like{
+    background-image: url("/src/assets/like.png");
+
+}
+
+.button-paperPlane{
+    background-image: url("/src/assets/paper-plane.png");
+
+
+}
+.reaction {
+padding: 5%;
+    position: relative;
+    width: 29%;
+
+}
+.color-post {
+
+    border-top: solid;
+        border-top-color: currentcolor;
+        border-top-width: medium;
+    border-width: 1px;
+    border-color: #ef8636;
+    background-color: #f0f0f0;
+    border-radius: 0px 0px 4px 4px;
+
+}
+.owner-post {
+    background-image: linear-gradient(to right, #ffd255, #f08737, #ef8636);
+    border-bottom: solid 1px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4%;
+    border: #ef8636;
+}
+.font-size-post{
+    font-size: 13px;
+}
+.cross{
+    background-image: url("/src/assets/cross.png");
+    background-size: 10px 10px;
+    height: 15px;
+    width:15px ;
+    border: none;
+    background-repeat: no-repeat;
+ 
+    background-position: center;
+}
+.text-post{
+    padding: 5%;
+}
+.menu{
+    background-image: url("/src/assets/lines-menu.png");
+    background-size: 30px 30px;
+    height: 45px;
+    width:45px ;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.posts {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.user-image-landscape{
+    display: none;
+ 
+}
+
+.user-photo-name {
+
+    display: flex;
+    width: 100%;
+
+}
+
+@media (min-width:800px){
+    .container {
+        display: flex;
+        justify-content: center;
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .user-image-landscape {
+        border-radius: 7px 10px 1px 1px;
+        display: block;
+        background-image: url("/src/assets/image-1.jpg");
+        background-size: 100% 100%;
+        height: 45%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    
+    }
+    .container-user {
+
+        flex-wrap: wrap;
+        width: 30%;
+        height: 30vh;
+        position: relative;
+        border: solid 1px;
+        border-radius: 11px;
+        padding: 0px;
+        margin-right: 3%;
+        border-color: #c6c6c6;
+        background-color: #fff;
+        border-color: #e6e6e6;
+    
+    }
+    
+    .user-photo-name {
+
+        display: flex;
+        width: 100%;
+    
+    }
+    .posts {
+        width: 45%;
+    
+    }
+    
+    .edit-post {
+
+        height: 20%;}
+        .reaction {
+
+            padding: 2%;
+          
+            width: 20%;
+        
+        }
+        .text-user {
+
+            padding: 8%;
+            padding-left: 3%;
+            padding-bottom: 0px;
+        
+        }
+        .user-photo{
+            padding-left: 4%;
+        }
+        .owner-post{
+            border-radius: 5px 5px 1px 1px;
+        }
+}
