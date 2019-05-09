@@ -40,7 +40,7 @@ export const login = () => {
   funcLogin(emailLogInEmail.value, passwordLogInEmail.value)
     .then(result => {
       changeHash('#/content')
-      // Content(result);
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error));
 
@@ -50,7 +50,7 @@ export const googleLogin = () => {
   funcGoogle()
     .then(result => {
       changeHash('#/content')
-      // Content(result);
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }
@@ -58,8 +58,7 @@ export const googleLogin = () => {
 export const facebookLogin = () => {
   funcFacebook()
     .then(result => {
-      changeHash('#/content')
-      // Content(result);
+      changeHash('#/content');
       getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
@@ -71,8 +70,8 @@ export const register = () => {
 
   funcRegister(emailSignIn.value, passwordSignIn.value)
     .then(result => {
-      changeHash('#/content')
-      // Content(result);
+      changeHash('#/content');
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }

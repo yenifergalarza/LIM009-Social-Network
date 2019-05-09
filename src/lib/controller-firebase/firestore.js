@@ -1,12 +1,12 @@
-
 export const getUserData = (user) => {
   const firestore = firebase.firestore();
   const usersDoc = firestore.doc(`users/info`)
   usersDoc.set({
-    uid: user.uid,
     name: user.displayName,
     email: user.email,
-    photo: user.photoURL
+    photo: user.photoURL,
+    uid: user.uid
+
   }).then(() => {
     console.log('Status saved')
   }).catch((error) => {
@@ -14,18 +14,8 @@ export const getUserData = (user) => {
   })
 }
 
-export const getRealTimeData = (element) => {
+export const getRealTimeData = (cb) => {
   const firestore = firebase.firestore();
   const usersDoc = firestore.doc(`users/info`)
-  usersDoc.onSnapshot((doc) => {
-    if (doc && doc.exists) {
-      const myData = doc.data();
-      console.log('check this document', doc);
-      element.innerHTML = `
-      <p>
-      Status: ${myData.name}
-      </p>
-      `
-    }
-  })
+  usersDoc.onSnapshot(cb)
 }
