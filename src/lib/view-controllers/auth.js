@@ -59,6 +59,7 @@ export const facebookLogin = () => {
   funcFacebook()
     .then(result => {
       changeHash('#/content');
+      console.log(result.user)
       getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))

@@ -22,7 +22,6 @@ export const getRealTimeData = (cb) => {
 
 export const addPost = (cb) => {
   const firestore = firebase.firestore();
-  // Add a new document with a generated id.
   const addDoc = firestore.collection('posts')
   addDoc.add(cb)
   .then(ref => {
@@ -33,6 +32,13 @@ export const addPost = (cb) => {
 
 export const getRealTimePost = (cb) => {
   const firestore = firebase.firestore();
-  const queryPost = firestore.collection('posts').where('valor', '>=', 5);
-  queryPost.onSnapshot(cb)
+  const queryPost = firestore.collection('posts').where('state', '==', true);
+  queryPost.onSnapshot(snapshot => {
+    const posts = []
+    snapshot.forEach(doc => {
+      posts.push(doc.data());
+    })
+    
+    cb(posts)
+  })
 }
