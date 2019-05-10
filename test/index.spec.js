@@ -3,7 +3,7 @@ const mockauth = new firebasemock.MockFirebase();
 global.firebase = new firebasemock.MockFirebaseSdk(
   // use null if your code does not use RTDB
   path => path ? mockdatabase.child(path) : null,
-  () =>  mockauth
+  () => mockauth
 )
 mockauth.autoFlush();
 
@@ -25,46 +25,52 @@ describe('funcLogin', () => {
 describe('funcRegister', () => {
   it('deberia registrar el email ingresado', (done) => {
     funcRegister('emailabc@gmail.com', 'abc666')
-    .then((user) => {
-      // console.log(user)
-       expect(user.email).toBe('emailabc@gmail.com')
-      done()
-    });
+      .then((user) => {
+        // console.log(user)
+        expect(user.email).toBe('emailabc@gmail.com')
+        done()
+      });
   });
 });
 
 describe('funcFacebook', () => {
   it('deberia poder ingresar con facebook', (done) => {
     funcFacebook()
-    .then((user) => {
-      expect(user.providerData[0].providerId).toBe('facebook.com')
-      done()
-    });
+      .then((user) => {
+        expect(user.providerData[0].providerId).toBe('facebook.com')
+        done()
+      });
   });
 });
 
 describe('funcGoogle', () => {
-  it('deberia poder ingresar con googĺe', (done) => { 
+  it('deberia poder ingresar con googĺe', (done) => {
     funcGoogle()
-    .then((user) => {
-      expect(user.providerData[0].providerId).toBe('google.com')
-      done()
-    })
+      .then((user) => {
+        expect(user.providerData[0].providerId).toBe('google.com')
+        done()
+      })
   });
 });
 
 describe('signOut', () => {
   it('no deberia retornar ningun usuario', (done) => {
-    return signOut()
-    .then(user => {
-      expect(user).toBe(undefined);
-      done()
-    })
+    signOut()
+      .then(user => {
+        expect(user).toBe(undefined);
+        done()
+      })
   })
-})
+});
 
 describe('activeUser', () => {
-  it.skip('deberia identificar si el usuario se encuentra activo', () => {
-    return activeUser(funcLogin('login@gmail.com', '123456'))
+  it.only('deberia identificar si el usuario se encuentra activo', (done) => {
+    funcRegister('emailabc@gmail.com', 'abc666')
+      .then(() => {
+          activeUser(user => {
+            expect(user.email).toBe('dhfhfhfhhjhjgmail.com')
+            done()
+          })
+      })
   })
-})
+});
