@@ -12,6 +12,7 @@ mockauth.autoFlush();
 
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser } from "../src/lib/controller-firebase/auth.js";
 
+
 describe('funcLogin', () => {
   it('deberia retornar el email: abc@gmail.com', (done) => {
     funcLogin('abc@gmail.com', '123456')
@@ -64,7 +65,18 @@ describe('signOut', () => {
 })
 
 describe('activeUser', () => {
-  it.skip('deberia identificar si el usuario se encuentra activo', () => {
-    return activeUser(funcLogin('login@gmail.com', '123456'))
-  })
+
+  it.only('deberia identificar si el usuario se encuentra activo', (done) => {
+
+   /*  return funcRegister('login@gmail.com', '123456')
+    .then(() => { */
+      const callback = user => {
+        console.log(user)
+        expect(user).toBe(null)
+        done()
+      }
+
+      activeUser(callback)
+   /*  }) */
+    })
 })
