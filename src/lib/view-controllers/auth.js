@@ -1,26 +1,30 @@
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, activeUser, signOut } from '../controller-firebase/auth.js';
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, signOut, activeUser, currentUser } from '../controller-firebase/auth.js';
+import { getUserData } from '../controller-firebase/firestore.js'
 
 const changeHash = (hash) => {
   location.hash = hash;
 }
 
-// activeUser();
-const getActiveUser = (user) => {
-  if (user) {
-    console.log("existe usuario acctivo")
-console.log(user)
-  } else {
-    console.log("no existe usuario activo")
-  }
-}
-
-export const active = () => {
-  activeUser(getActiveUser)
-}
-
 export const signOutUser = () => {
   signOut();
   changeHash('#')
+}
+
+const getUserInfo = cb => {
+  if(currentUser()) {
+    cb(currentUser());
+  }
+
+  const unsubscribe = () => {
+    activeUser( user => {
+      if(user){
+        cb(user)
+      } else {
+
+      }
+    });
+    unsubscribe();
+  }
 }
 
 const ShowErrorMessaggeDom = (error) => {
@@ -36,7 +40,7 @@ export const login = () => {
   funcLogin(emailLogInEmail.value, passwordLogInEmail.value)
     .then(result => {
       changeHash('#/content')
-      // Content(result);
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error));
 
@@ -46,7 +50,7 @@ export const googleLogin = () => {
   funcGoogle()
     .then(result => {
       changeHash('#/content')
-      // Content(result);
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }
@@ -54,8 +58,9 @@ export const googleLogin = () => {
 export const facebookLogin = () => {
   funcFacebook()
     .then(result => {
-      changeHash('#/content')
-      // Content(result);
+      changeHash('#/content');
+      console.log(result.user)
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }
@@ -66,9 +71,8 @@ export const register = () => {
 
   funcRegister(emailSignIn.value, passwordSignIn.value)
     .then(result => {
-      changeHash('#/content')
-      // Content(result);
+      changeHash('#/content');
+      getUserData(result.user)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }
-

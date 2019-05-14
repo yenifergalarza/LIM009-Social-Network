@@ -1,3 +1,4 @@
+
 export const funcLogin = (emailLogIn, passwordLogIn) => firebase.auth().signInWithEmailAndPassword(emailLogIn, passwordLogIn);
 
 // const verify = () => firebase.auth().currentUsersendEmailVerification()
@@ -19,3 +20,5 @@ export const funcFacebook = () => {
 export const signOut = () => firebase.auth().signOut();
 
 export const activeUser = (cb) => firebase.auth().onAuthStateChanged(cb)
+
+export const currentUser = () => firebase.auth().currentUser

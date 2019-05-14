@@ -17,4 +17,3 @@ window.addEventListener('load', () => {
   initFirebase();
   initRoute();
 });
-
