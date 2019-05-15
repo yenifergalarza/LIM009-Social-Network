@@ -1,9 +1,34 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { currentUser } from '../lib/controller-firebase/auth.js'
-import { getRealTimePost } from '../lib/controller-firebase/firestore.js'
-import { addNewPost, getUser } from '../lib/view-controllers/firestore.js'
+import { addNewPost, getUser, deletePosts } from '../lib/view-controllers/firestore.js';
 
-export const Content = () => {
+const listPosts = (publi) => {
+  console.log(publi)
+  const div = document.createElement('div')
+  const publicacion = `
+        <div>Publicado por <span>${publi.doc.user}</span>
+        </div>
+        <br>
+        <div>${publi.doc.post}</div>
+        <br>
+        <div> likes: ${publi.doc.likes} <span id="like"></span></div>
+        <br>
+        <button id="delete"> Eliminar </button>
+        <br>
+        <button id="edit"> Editar </button>
+        <br>
+          `
+  div.innerHTML = publicacion;
+  
+  const btnDelete = div.querySelector('#delete');
+  btnDelete.addEventListener('click', () => deletePosts(publi))
+
+  const btnEdit = div.querySelector('#delete');
+  btnEdit.addEventListener('click', () => deletePosts(publi))
+
+  return div
+}
+
+export const Content = (posts) => {
   const div = document.createElement('div');
   div.innerHTML = `
         <div id="printinfo"> </div>
@@ -28,27 +53,11 @@ export const Content = () => {
           `
   });
 
-  const user = currentUser()
   add.addEventListener('click', () => {
-    addNewPost(user)
+    addNewPost(comment)
   });
-  getRealTimePost((posts) => {
-    posts.forEach(publi => {
-      console.log(publi)
-      const div = document.createElement('div')
-      const publicacion = `
-        <div>Publicado por <span>${publi.user}</span>
-        </div>
-        <br>
-        <div>${publi.post}</div>
-        <br>
-        <div> likes: ${publi.likes} <span id="like"></span></div>
-        <br>
-        <br>
-          `
-      div.innerHTML = publicacion
-      return div
-    })
-  });
+  posts.forEach(publi => {
+    postAdded.appendChild(listPosts(publi))
+  })
   return div
 };
