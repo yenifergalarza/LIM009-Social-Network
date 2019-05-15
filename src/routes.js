@@ -1,11 +1,11 @@
 import { components } from "./ui/index.js";
+import { activeUser, currentUser } from "./lib/controller-firebase/auth.js"
+import { getRealTimePost } from './lib/controller-firebase/firestore.js'
 
 const changeRoute = (hash) => {
   console.log(hash);
   const mainSection = document.getElementById('main');
   mainSection.innerHTML = '';
-  // const login = document.getElementById('login');
-  // login.innerHTML = '';
 
   switch (hash) {
     case '#':
@@ -16,7 +16,14 @@ const changeRoute = (hash) => {
       return mainSection.appendChild(components.register());
     };
     case '#/content': {
-      return mainSection.appendChild(components.content());
+     activeUser( () => { 
+      if(currentUser()){ 
+        getRealTimePost(posts => { 
+          mainSection.innerHTML = ''
+          return mainSection.appendChild(components.content(posts));
+        })
+      }
+      }) 
     };
     // default:
     //   return mainSection.appendChild(components.different());
