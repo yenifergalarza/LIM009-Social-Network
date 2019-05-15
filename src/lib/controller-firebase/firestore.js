@@ -1,6 +1,6 @@
 export const getUserData = (user) => {
   const firestore = firebase.firestore();
-  firestore.doc(`users/info`).set({
+  firestore.doc(`users/${user.uid}`).set({
     name: user.displayName,
     email: user.email,
     photo: user.photoURL,
@@ -12,15 +12,14 @@ export const getUserData = (user) => {
   })
 }
 
-export const getRealTimeData = (cb) => {
+export const getRealTimeData = (uid, cb) => {
   const firestore = firebase.firestore();
-  firestore.doc(`users/info`).onSnapshot(cb)
+  firestore.collection('users').doc(uid).onSnapshot(cb)
 }
 
 export const addPost = (input, user, like, privacyState) => {
   const firestore = firebase.firestore();
-  const addDoc = firestore.collection('posts')
-  addDoc.add({
+  firestore.collection('posts').add({
     post: input.value,
     user: user.displayName,
     uid: user.uid,
@@ -37,13 +36,11 @@ export const addPost = (input, user, like, privacyState) => {
 
 export const getRealTimePost = (cb) => {
   const firestore = firebase.firestore();
-  const queryPost = firestore.collection('posts');
-  queryPost.onSnapshot(snapshot => {
+  firestore.collection('posts').onSnapshot(snapshot => {
     const posts = []
     snapshot.forEach(doc => {
       posts.push({ id: doc.id, doc: doc.data() });
     })
-
     cb(posts)
   })
 }
@@ -57,7 +54,13 @@ export const deletePost = (id) => {
 
 }
 
-export const editPost = () => {
+export const editPost = (id, input) => {
   const firestore = firebase.firestore();
-  firestore.collection('posts').doc(id).update()
+  firestore.collection('posts').doc(id).update({
+    post: input
+  }).then(()=> {
+    console.log('updated!')
+  }).catch(()=>{
+    console.log('wrong!')
+  })
 }

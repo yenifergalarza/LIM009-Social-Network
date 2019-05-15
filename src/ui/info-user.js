@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts } from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts } from '../lib/view-controllers/firestore.js';
 
 const listPosts = (publi) => {
   console.log(publi)
@@ -9,7 +9,8 @@ const listPosts = (publi) => {
         </div>
         <br>
         <div>${publi.doc.post}</div>
-        <br>
+        <input id="update-data" value=${publi.doc.post} />
+        <br> <br>
         <div> likes: ${publi.doc.likes} <span id="like"></span></div>
         <br>
         <button id="delete"> Eliminar </button>
@@ -18,12 +19,13 @@ const listPosts = (publi) => {
         <br>
           `
   div.innerHTML = publicacion;
-  
+
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi))
 
-  const btnEdit = div.querySelector('#delete');
-  btnEdit.addEventListener('click', () => deletePosts(publi))
+  const btnEdit = div.querySelector('#edit');
+  const updateData = div.querySelector('#update-data')
+  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value))
 
   return div
 }
