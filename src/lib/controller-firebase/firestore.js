@@ -1,13 +1,15 @@
 export const getUserData = (user) => {
     const firestore = firebase.firestore();
-    const usersDoc = firestore.doc(`../users/info`)
+    const usersDoc = firestore.doc(`users/info`)
     usersDoc.set({
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
       uid: user.uid
   
-    }).then(() => {
+    }).then((doc) => {
+      const mydata = doc.data();
+      cb(mydata);
       console.log('Status saved')
     }).catch((error) => {
       console.log(error)
@@ -18,7 +20,8 @@ export const getUserData = (user) => {
     const firestore = firebase.firestore();
     const usersDoc = firestore.doc(`users/info`)
     usersDoc.onSnapshot(cb)
-  };
+    
+  }
   
   export const addPost = (cb) => {
     const firestore = firebase.firestore();
@@ -28,7 +31,7 @@ export const getUserData = (user) => {
       console.log('Added document with ID: ', ref.id);
     })
   
-  };
+  }
   
   export const getRealTimePost = (cb) => {
     const firestore = firebase.firestore();
@@ -41,4 +44,4 @@ export const getUserData = (user) => {
       
       cb(posts)
     })
-  };
+  }

@@ -1,4 +1,5 @@
-import { login, googleLogin, facebookLogin, active } from '../lib/view-controllers/auth.js'
+
+import { login, googleLogin, facebookLogin } from '../lib/view-controllers/auth.js'
 
 
 export const Login = () => {
@@ -40,8 +41,5 @@ export const Login = () => {
   const fbLogin = div.querySelector('#fb-login');
   fbLogin.addEventListener('click', facebookLogin);
 
-  active()
-
   return div
 };
-
