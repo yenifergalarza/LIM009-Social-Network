@@ -11,7 +11,6 @@ mockauth.autoFlush();
 // global.firebase = MockFirebase();
 
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser } from "../src/lib/controller-firebase/auth.js";
-
 // describe('funcLogin', () => {
 //   it('deberia retornar el email: abc@gmail.com', (done) => {
 //     funcLogin('abc@gmail.com', '123456')
@@ -65,14 +64,16 @@ import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser 
 
 describe('activeUser', () => {
   it.only('deberia identificar si el usuario se encuentra activo', (done) => {
-    jest.setTimeout(60000);
-    return funcLogin('emailabc@gmail.com', 'abc666')
-      .then(() => {
-          activeUser(user => {
-            console.log(user)
-            expect(user.email).toEqual('emailabc@gmail.com')
-            done()
-          })
-      })
-  })
-});
+
+   /*  return funcRegister('login@gmail.com', '123456')
+    .then(() => { */
+      const callback = user => {
+        console.log(user)
+        expect(user).toBe(null)
+        done()
+      }
+
+      activeUser(callback)
+   /*  }) */
+    })
+})

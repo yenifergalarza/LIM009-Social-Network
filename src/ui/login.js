@@ -4,10 +4,10 @@ import { login, googleLogin, facebookLogin } from '../lib/view-controllers/auth.
 export const Login = () => {
   const div = document.createElement('div')
   const back1 = `  
-    <div class="container container-bg">
+    <div class="container1 container-bg">
       <img  class="someBg" src="assets/18984.jpg" alt="Some bg">
     </div>
-    <div id='login' class="container px-5">
+    <div id='login' class="container1 px-5">
   
       <h2 class="title-pass">WEBOOKS</h2>
       <h4 class="px-4 subtitle-pass" >Bienvenidx!</h4>
@@ -42,4 +42,3 @@ export const Login = () => {
 
   return div
 };
-

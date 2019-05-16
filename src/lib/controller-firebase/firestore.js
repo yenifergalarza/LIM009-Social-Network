@@ -58,9 +58,9 @@ export const editPost = (id, input) => {
   const firestore = firebase.firestore();
   firestore.collection('posts').doc(id).update({
     post: input
-  }).then(()=> {
+  }).then(() => {
     console.log('updated!')
-  }).catch(()=>{
+  }).catch(() => {
     console.log('wrong!')
   })
 }
