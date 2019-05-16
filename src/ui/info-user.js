@@ -2,12 +2,9 @@ import { signOutUser } from '../lib/view-controllers/auth.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 import { getRealTimePost, getUserData, getRealTimeData  } from '../lib/controller-firebase/firestore.js';
 import { addNewPost,getUser} from '../lib/view-controllers/firestore.js';
-
 export const Content = () => {
   const div = document.createElement('div');
   div.innerHTML = `
-  
-
 <nav class="nav"> 
 <div class="nav-content">
 <div id="btn-out" class="menu"></div>
@@ -44,9 +41,7 @@ export const Content = () => {
   getUser((myData) => {
     printinfo.innerHTML = `
    
-    <div class="user-image-landscape">
-    
-    </div>
+    <img class="user-image-landscape" src="../src/assets/648192-PORPT9-246.jpg">
     <div class="user-photo-name"><img class="user-photo" src="${myData.photo}" alt="">
     <div class="text-user">
     <p></p>
