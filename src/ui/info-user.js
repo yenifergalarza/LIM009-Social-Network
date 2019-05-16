@@ -50,7 +50,7 @@ export const Content = (posts) => {
       <div class="user-photo-name">
         <img class="user-photo" src="../controller-firebase/PIRATAS.jpg" alt="">
         <div class="text-user" id="print-info"></div>
-        <button id="btn-out">Cerrar sesión</button>
+        <button id="btn-out">Cerrar sesiÃ³n</button>
       </div>
       
     </div>

@@ -1,7 +1,7 @@
-import { initRoute } from './routes.js'
+import { initRoute } from './routes.js';
 
 // Initialize Firebase
-const initFirebase = () => {
+export const initFirebase = () => {
   const config = {
     apiKey: "AIzaSyDq83GdPtM8kOrF6BGhTuAkFFFC7T-ou2c",
     authDomain: "fir-basics-c204d.firebaseapp.com",
@@ -10,6 +10,8 @@ const initFirebase = () => {
     storageBucket: "fir-basics-c204d.appspot.com",
     messagingSenderId: "582126712915"
   };
+
+  
   firebase.initializeApp(config);
 }
 
@@ -17,4 +19,3 @@ window.addEventListener('load', () => {
   initFirebase();
   initRoute();
 });
-

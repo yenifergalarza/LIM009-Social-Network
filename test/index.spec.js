@@ -11,26 +11,27 @@ mockauth.autoFlush();
 // global.firebase = MockFirebase();
 
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser } from "../src/lib/controller-firebase/auth.js";
-// describe('funcLogin', () => {
-//   it('deberia retornar el email: abc@gmail.com', (done) => {
-//     funcLogin('abc@gmail.com', '123456')
-//       .then(user => {
-//         expect(user.email).toBe('abc@gmail.com')
-//         done()
-//       });
-//   });
-// });
 
-// describe('funcRegister', () => {
-//   it('deberia registrar el email ingresado', (done) => {
-//     funcRegister('emailabc@gmail.com', 'abc666')
-//       .then((user) => {
-//         // console.log(user)
-//         expect(user.email).toBe('emailabc@gmail.com')
-//         done()
-//       });
-//   });
-// });
+describe('funcLogin', () => {
+  it('deberia retornar el email: abc@gmail.com', (done) => {
+    funcLogin('abc@gmail.com', '123456')
+      .then(user => {
+        expect(user.email).toBe('abc@gmail.com')
+        done()
+      });
+  });
+});
+
+describe('funcRegister', () => {
+  it('deberia registrar el email ingresado', (done) => {
+    funcRegister('emailabc@gmail.com', 'abc666')
+    .then((user) => {
+      // console.log(user)
+       expect(user.email).toBe('emailabc@gmail.com')
+      done()
+    });
+  });
+});
 
 // describe('funcFacebook', () => {
 //   it('deberia poder ingresar con facebook', (done) => {

@@ -25,4 +25,3 @@ export const editPosts = (publi, input) => {
   if (currentUser().uid === publi.doc.uid) {
     editPost(publi.id, input)
   }
-}
