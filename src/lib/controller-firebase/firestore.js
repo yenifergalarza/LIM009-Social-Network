@@ -63,4 +63,17 @@ export const editPost = (id, input) => {
   }).catch(() => {
     console.log('wrong!')
   })
+
+}
+
+
+export const likePlus = (id, like) => {
+  const firestore = firebase.firestore();
+  firestore.collection('posts').doc(id).update({
+    likes: like
+  }).then(() => {
+    console.log('liked!')
+  }).catch(() => {
+    console.log('not liked!')
+  })
 }

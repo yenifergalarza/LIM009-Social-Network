@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts } from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts ,addingLikes} from '../lib/view-controllers/firestore.js';
 
 const listPosts = (publi) => {
   console.log(publi)
@@ -22,6 +22,13 @@ const listPosts = (publi) => {
     </div>
   `
   div.innerHTML = publicacion;
+  const like = div.querySelector('#like');
+  let numberLike = 0;
+  const pluspluslike =(Like)=>{
+    Like= Like +1;
+  return Like
+  }
+like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)));
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi))
 
@@ -65,8 +72,8 @@ export const Content = (posts) => {
   const comment = div.querySelector('#comment'); 
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
-
-  buttonLogOut.addEventListener('click', signOutUser)
+  
+  buttonLogOut.addEventListener('click', signOutUser);
   getUser((myData) => {
     printinfo.innerHTML += `
   <div class="container-user">

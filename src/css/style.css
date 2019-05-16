@@ -273,7 +273,11 @@ a:visited {
   background-image: url(/src/assets/buildings.png);
   background-blend-mode: luminosity;
   height: 100vh;
-  }
+  flex-direction: row-reverse;
+  height: auto;
+
+  background-size: contain;  
+}
   .user-photo{
   height: 100px;
   border-radius: 50%;
@@ -433,7 +437,7 @@ a:visited {
   justify-content: center;
   padding-left: 7%;
   padding-right: 7%;
-  flex-direction: row-reverse;
+
   }
   
   .user-image-landscape {
@@ -495,4 +499,7 @@ a:visited {
   width: 57%;}
   }
   
+  #main{
+    background-color: #f7f7f7;
+  }
 
