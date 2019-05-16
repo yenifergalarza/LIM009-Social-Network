@@ -10,9 +10,9 @@ export const getUser = (cb) => {
   });
 }
 
-export const addNewPost = (input) => {
+export const addNewPost = (input, privacy) => {
   const user = currentUser()
-  addPost(input, user, 0, 'public');
+  addPost(input, user, 0, privacy);
 }
 
 export const deletePosts = (publi) => {
