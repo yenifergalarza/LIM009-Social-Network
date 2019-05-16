@@ -1,5 +1,6 @@
 import { components } from "./ui/index.js";
 import { activeUser, currentUser } from "./lib/controller-firebase/auth.js"
+import { getRealTimePost } from './lib/controller-firebase/firestore.js'
 
 const changeRoute = (hash) => {
   console.log(hash);
@@ -15,9 +16,13 @@ const changeRoute = (hash) => {
       return mainSection.appendChild(components.register());
     };
     case '#/content': {
-     activeUser( () => {
-      if(currentUser())
-      return mainSection.appendChild(components.content());
+     activeUser( () => { 
+      if(currentUser()){ 
+        getRealTimePost(posts => { 
+          mainSection.innerHTML = ''
+          return mainSection.appendChild(components.content(posts));
+        })
+      }
       }) 
     };
     // default:
