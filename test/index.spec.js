@@ -3,7 +3,7 @@ const mockauth = new firebasemock.MockFirebase();
 global.firebase = new firebasemock.MockFirebaseSdk(
   // use null if your code does not use RTDB
   path => path ? mockdatabase.child(path) : null,
-  () =>  mockauth
+  () => mockauth
 )
 mockauth.autoFlush();
 
@@ -11,7 +11,6 @@ mockauth.autoFlush();
 // global.firebase = MockFirebase();
 
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser } from "../src/lib/controller-firebase/auth.js";
-
 
 describe('funcLogin', () => {
   it('deberia retornar el email: abc@gmail.com', (done) => {
@@ -34,38 +33,37 @@ describe('funcRegister', () => {
   });
 });
 
-describe('funcFacebook', () => {
-  it('deberia poder ingresar con facebook', (done) => {
-    funcFacebook()
-    .then((user) => {
-      expect(user.providerData[0].providerId).toBe('facebook.com')
-      done()
-    });
-  });
-});
+// describe('funcFacebook', () => {
+//   it('deberia poder ingresar con facebook', (done) => {
+//     funcFacebook()
+//       .then((user) => {
+//         expect(user.providerData[0].providerId).toBe('facebook.com')
+//         done()
+//       });
+//   });
+// });
 
-describe('funcGoogle', () => {
-  it('deberia poder ingresar con googĺe', (done) => { 
-    funcGoogle()
-    .then((user) => {
-      expect(user.providerData[0].providerId).toBe('google.com')
-      done()
-    })
-  });
-});
+// describe('funcGoogle', () => {
+//   it('deberia poder ingresar con googÄºe', (done) => {
+//     funcGoogle()
+//       .then((user) => {
+//         expect(user.providerData[0].providerId).toBe('google.com')
+//         done()
+//       })
+//   });
+// });
 
-describe('signOut', () => {
-  it('no deberia retornar ningun usuario', (done) => {
-    return signOut()
-    .then(user => {
-      expect(user).toBe(undefined);
-      done()
-    })
-  })
-})
+// describe('signOut', () => {
+//   it('no deberia retornar ningun usuario', (done) => {
+//     signOut()
+//       .then(user => {
+//         expect(user).toBe(undefined);
+//         done()
+//       })
+//   })
+// });
 
 describe('activeUser', () => {
-
   it.only('deberia identificar si el usuario se encuentra activo', (done) => {
 
    /*  return funcRegister('login@gmail.com', '123456')

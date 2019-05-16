@@ -41,7 +41,7 @@ export const Content = () => {
   getUser((myData) => {
     printinfo.innerHTML = `
    
-    <img class="user-image-landscape" src="../src/assets/648192-PORPT9-246.jpg">
+    <img class="user-image-landscape" src=""../src/assets/picture.png">
     <div class="user-photo-name"><img class="user-photo" src="${myData.photo}" alt="">
     <div class="text-user">
     <p></p>
