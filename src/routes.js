@@ -9,7 +9,8 @@ const changeRoute = (hash) => {
 
   switch (hash) {
     case '#':
-    case '': {
+    case '':
+    case '#/': {
       return mainSection.appendChild(components.login());
     };
     case '#/register': {

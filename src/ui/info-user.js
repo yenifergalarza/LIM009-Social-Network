@@ -10,10 +10,12 @@ const listPosts = (publi) => {
         <h3 class="font-size-post white ">Publicado por <span>${publi.doc.user}</span> </h3>
         <div class="cross" id="delete"></div>
       </div>
+
       <div class="font-size-post text-post"> ${publi.doc.post}</div>
-      <input id="update-data" value=${publi.doc.post} />
+      <input id="update-data" value= ${publi.doc.post} />
       <button id="edit"> Editar </button>
-       <div class="color-post">
+
+      <div class="color-post">
         <div class="container-click reaction">
           <div type="button" id="like" class="button-like click button-icon"> ${publi.doc.likes} </div>
           <div id="edit" class=" button-paperPlane click button-icon"></div>
@@ -45,19 +47,23 @@ export const Content = (posts) => {
   <nav class="nav">
     <div class="nav-content">
       <div id="show-menu" class="menu"></div>
-      <h1 class="white">Welcome </h1>  <button id="btn-out">Cerrar sesión</button>
+      <h1 class="white">Welcome </h1>  
+      <button id="btn-out">Cerrar sesión</button>
     </div>
   </nav>
 
-  <div class="container" id="print-info">
-
-
-
+  
+  <div class="container">
+  <div class="container-user" id="print-info"></div>
     <div class="posts">
     <div class="edit-post post ">
-      <textarea name="" id="comment" cols="30" rows="10" class="write-post "></textarea>
+      <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
       <div class="container-click">
-        <div type="button" id="add-image" class="button-photo click button-icon"> </div>
+        <div type="button" id="add-image" class="button-photo click button-icon"></div>
+        <select name="privacy" id="select-privacy"> 
+          <option value="public">Público </option>
+          <option value="private">Solo yo</option>
+        </select>
         <button id="add" class="button-share click white"> Publicar </button>
       </div>
     </div>
@@ -72,24 +78,25 @@ export const Content = (posts) => {
   const comment = div.querySelector('#comment'); 
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
-  
-  buttonLogOut.addEventListener('click', signOutUser);
+  const privacy = div.querySelector('#select-privacy');
+
+
+  buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
     printinfo.innerHTML += `
-  <div class="container-user">
-  <div class="user-image-landscape">
-  </div>
+      <div class="user-image-landscape">
+      </div>
   
-  <div class="user-photo-name">
-  <img class="user-photo" src="${myData.photo}" alt="">
-  <div class="text-user">
-  <p> ${myData.name}</p>
-  <p>developer jr</p></div>
-          `
+      <div class="user-photo-name">
+        <img class="user-photo" src="${myData.photo}" alt="">
+      <div class="text-user">
+      <p> ${myData.name}</p>
+      <p>developer jr</p>
+  `
   });
 
   add.addEventListener('click', () => {
-    addNewPost(comment)
+    addNewPost(comment, privacy.value)
   });
 
   posts.forEach(publi => {
