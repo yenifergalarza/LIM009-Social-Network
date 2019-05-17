@@ -1,5 +1,6 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName} from '../lib/view-controllers/firestore.js';
+
 
 const listPosts = (publi) => {
   console.log(publi)
@@ -41,7 +42,9 @@ like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)))
   return div
 }
 
+
 export const Content = (posts) => { 
+  console.log("hola");
   const div = document.createElement('div');
   div.innerHTML = `
   <nav class="nav">
@@ -83,16 +86,25 @@ export const Content = (posts) => {
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
-    printinfo.innerHTML += `
+    console.log("dentro de getuser")
+    printinfo.innerHTML = `
       <div class="user-image-landscape">
       </div>
   
       <div class="user-photo-name">
         <img class="user-photo" src="${myData.photo}" alt="">
       <div class="text-user">
-      <p> ${myData.name}</p>
+      <p id="nameNeedChange"> ${myData.name}</p>
+      <input id="inputName"/>
+      <div class="button-like click button-icon" id="changeName"> </div>
       <p>developer jr</p>
-  `
+  `;
+
+const buttonActionChange = printinfo.querySelector('#changeName');
+buttonActionChange.addEventListener('click',()=>{
+  const inputNewName =  printinfo.querySelector("#inputName"); 
+  updateUserDataName(myData,inputNewName.value);
+})
   });
 
   add.addEventListener('click', () => {
