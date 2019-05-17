@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts, addingLikes } from '../lib/view-controllers/firestore.js';
 
 const listPosts = (publi) => {
   console.log(publi)
@@ -24,13 +24,12 @@ const listPosts = (publi) => {
     </div>
   `
   div.innerHTML = publicacion;
+
   const like = div.querySelector('#like');
   let numberLike = 0;
-  const pluspluslike =(Like)=>{
-    Like= Like +1;
-  return Like
-  }
-like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)));
+
+  like.addEventListener('click', () => addingLikes(publi, numberLike++));
+
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi))
 
@@ -41,7 +40,7 @@ like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)))
   return div
 }
 
-export const Content = (posts) => { 
+export const Content = (posts) => {
   const div = document.createElement('div');
   div.innerHTML = `
   <nav class="nav">
@@ -72,10 +71,10 @@ export const Content = (posts) => {
   </div>
 
   `;
-  
+
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
-  const comment = div.querySelector('#comment'); 
+  const comment = div.querySelector('#comment');
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
@@ -102,6 +101,6 @@ export const Content = (posts) => {
   posts.forEach(publi => {
     postAdded.appendChild(listPosts(publi))
   })
-  
+
   return div
 };

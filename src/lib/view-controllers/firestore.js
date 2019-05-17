@@ -1,4 +1,4 @@
-import { getRealTimeData, addPost, deletePost, editPost ,likePlus} from '../controller-firebase/firestore.js'
+import { getRealTimeData, addPost, deletePost, editPost, likePlus } from '../controller-firebase/firestore.js'
 import { currentUser } from '../controller-firebase/auth.js';
 
 export const getUser = (cb) => {
@@ -28,10 +28,7 @@ export const editPosts = (publi, input) => {
   }
 }
 
+export const addingLikes = (publi, like) => {
+  likePlus(publi.id, like)
 
-
-
-  export const addingLikes = (publi,like)=>{
-      likePlus(publi.id, like)
-    
-  }
+}
