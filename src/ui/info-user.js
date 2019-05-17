@@ -14,13 +14,14 @@ const listPosts = (publi) => {
 
       <div class="font-size-post text-post"> ${publi.doc.post}</div>
       <input id="update-data" value= ${publi.doc.post} />
-      <button id="edit"> Editar </button>
+      
 
       <div class="color-post">
         <div class="container-click reaction">
           <div type="button" id="like" class="button-like click button-icon"> ${publi.doc.likes} </div>
           <div id="edit" class=" button-paperPlane click button-icon"></div>
-        </div>
+          <button id="edit" class=" button-like click button-icon"> Editar </button>
+          </div>
       </div>
     </div>
   `
