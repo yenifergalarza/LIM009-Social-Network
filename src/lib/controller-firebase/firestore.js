@@ -77,3 +77,19 @@ export const likePlus = (id, like) => {
     console.log('not liked!')
   })
 }
+
+export const updateUser = (user, newName) => {
+
+  const firestore = firebase.firestore();
+  return  firestore.doc(`users/${user.uid}`).update({
+    name: newName
+  }).then(() => {
+    console.log('new userdata saved')
+  }).catch((error) => {
+    console.log(error)
+  })
+}
+/*
+
+UI -> event -> validate inputs -> render loader -> do stuff -> hide loader -> display new UI
+*/
