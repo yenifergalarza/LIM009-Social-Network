@@ -5,50 +5,28 @@
       posts: {
         __doc__: {
             123456: {     
-likes: 0,
-post :"hola",
-privacy :"private",
-state : true,
-uid :"mZlFTubNrZPWBPQeMxUVoXX0exy1" ,
-user :"Kathlen Montalvo" 
+likes: 0,post : "hola",privacy :"private",state : true,uid :"mZlFTubNrZPWBPQeMxUVoXX0exy1" ,user :"juanita"
+} 
           },
           234567: {     
-            likes: 0,
-            post :"adios",
-            privacy :"public",
-            state : true,
-            uid :"mZlFTubNrZPWBPQeMxUVoXX0exy1" ,
-            user :"Kathlen Montalvo" 
+        likes: 0, post :"adios",privacy :"public",state : true,uid :"mZlFTubNrZPWBPQeMxUVoXX0exy1" ,user :"perlita" 
                       },
         }
       }
     }
-  };
+    const user = {displayName:"juanita"};
   
   global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
   
-  import { getRealTimeData,getRealTimePost, addPost, deletePost, editPost ,likePlus,updateUser} from "../src/lib/controller-firebase/firestore.js"
-  
-  describe('lista de notas', () => {
-    it('Debería porder agregar una nota', (done) => {
-      return addPost(123456,'hola')
-        .then(() => getRealTimePost(
-          (data) => {
-            const result = data.find((post) => post.post === 'hola');
-            expect(result.post).toBe('hola');
+  import { getRealTimeData,getRealTimePost, addPost, deletePost, editPost ,likePlus,updateUser} from "../src/lib/controller-firebase/firestore.js";
+describe('addPost',()=>{
+    it('deberia agreagar un post ',(done)=>{
+        return addPost('hola',user,0,"private").then((data)=>{
+            const callback =(notes)=>{
+                console.log(notes);
             done()
-          }
-        ))
-    });
-    it('Debería poder eliminar una nota', (done) => {
-      return deleteNote('abc1d')
-        .then(() => getNotes(
-          (data) => {
-            const result = data.find((note) => note.id === 'abc1d');
-            expect(result).toBe(undefined);
-            done()
-          }
-        ))
+            }
+            getRealTimePost(callback)
+                })
     })
-  })
-  
+})
