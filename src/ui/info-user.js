@@ -1,10 +1,10 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName, editPrivacy} from '../lib/view-controllers/firestore.js';
+import { currentUser } from '../lib/controller-firebase/auth.js';
 
 
 const listPosts = (publi) => {
-  console.log(publi)
-  const div = document.createElement('div');
+  const div = document.createElement('div')
   const publicacion = `
     <div class="comment-post post">
       <div class="owner-post">
@@ -22,20 +22,22 @@ const listPosts = (publi) => {
           <div id="edit" class=" button-paperPlane click button-icon"></div>
           <button id="edit" class=" button-like click button-icon"> Editar </button>
           </div>
+          
+          <select name="privacy" id="edit-privacy"> 
+            <option value="public">Público </option>
+            <option value="private">Solo yo</option>
+          </select>
+        </div>
       </div>
     </div>
   `
   div.innerHTML = publicacion;
+
   const like = div.querySelector('#like');
   let numberLike = 0;
-  const pluspluslike =(Like)=>{
-    Like= Like +1;
-  return Like;
-  };
-like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)));
-if (numberLike != 0) {
-  
-}
+
+  like.addEventListener('click', () => addingLikes(publi, numberLike++));
+
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi));
 
@@ -43,12 +45,13 @@ if (numberLike != 0) {
   const updateData = div.querySelector('#update-data');
   btnEdit.addEventListener('click', () => editPosts(publi, updateData.value));
 
+  const privacy = div.querySelector('#edit-privacy');
+  // privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
+
   return div
 }
 
-
-export const Content = (posts) => { 
-  console.log("hola");
+export const Content = (posts) => {
   const div = document.createElement('div');
   div.innerHTML = `
   <nav class="nav">
@@ -61,28 +64,28 @@ export const Content = (posts) => {
 
   
   <div class="container">
-  <div class="container-user" id="print-info"></div>
+    <div class="container-user" id="print-info"></div>
     <div class="posts">
-    <div class="edit-post post ">
-      <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
-      <div class="container-click">
-        <div type="button" id="add-image" class="button-photo click button-icon"></div>
-        <select name="privacy" id="select-privacy"> 
-          <option value="public">Público </option>
-          <option value="private">Solo yo</option>
-        </select>
-        <button id="add" class="button-share click white"> Publicar </button>
+      <div class="edit-post post ">
+        <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
+        <div class="container-click">
+          <div type="button" id="add-image" class="button-photo click button-icon"></div>
+          <select name="privacy" id="select-privacy"> 
+            <option value="public">Público </option>
+            <option value="private">Solo yo</option>
+          </select>
+          <button id="add" class="button-share click white"> Publicar </button>
+        </div>
       </div>
+      <div id="post-added"></div>
     </div>
-    <div id="post-added"></div>
-  </div>
   </div>
 
   `;
-  
+
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
-  const comment = div.querySelector('#comment'); 
+  const comment = div.querySelector('#comment');
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
@@ -90,7 +93,6 @@ export const Content = (posts) => {
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
-    console.log("dentro de getuser");
     printinfo.innerHTML = `
       <div class="user-image-landscape">
       </div>
@@ -116,8 +118,12 @@ buttonActionChange.addEventListener('click',()=>{
   });
 
   posts.forEach(publi => {
-    postAdded.appendChild(listPosts(publi));
+    console.log(publi)
+    if (publi.doc.privacy=='public') {
+      postAdded.appendChild(listPosts(publi))
+    } else if (publi.doc.privacy=='private' && currentUser().uid == publi.doc.uid ) {
+      postAdded.appendChild(listPosts(publi))
+    }
   })
-  
-  return div;
+  return div
 };
