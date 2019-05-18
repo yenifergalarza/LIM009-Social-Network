@@ -4,7 +4,7 @@ import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserData
 
 const listPosts = (publi) => {
   console.log(publi)
-  const div = document.createElement('div')
+  const div = document.createElement('div');
   const publicacion = `
     <div class="comment-post post">
       <div class="owner-post">
@@ -30,15 +30,18 @@ const listPosts = (publi) => {
   let numberLike = 0;
   const pluspluslike =(Like)=>{
     Like= Like +1;
-  return Like
-  }
+  return Like;
+  };
 like.addEventListener('click',() => addingLikes(publi,pluspluslike(numberLike)));
+if (numberLike != 0) {
+  
+}
   const btnDelete = div.querySelector('#delete');
-  btnDelete.addEventListener('click', () => deletePosts(publi))
+  btnDelete.addEventListener('click', () => deletePosts(publi));
 
   const btnEdit = div.querySelector('#edit');
-  const updateData = div.querySelector('#update-data')
-  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value))
+  const updateData = div.querySelector('#update-data');
+  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value));
 
   return div
 }
@@ -87,7 +90,7 @@ export const Content = (posts) => {
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
-    console.log("dentro de getuser")
+    console.log("dentro de getuser");
     printinfo.innerHTML = `
       <div class="user-image-landscape">
       </div>
@@ -109,12 +112,12 @@ buttonActionChange.addEventListener('click',()=>{
   });
 
   add.addEventListener('click', () => {
-    addNewPost(comment, privacy.value)
+    addNewPost(comment, privacy.value);
   });
 
   posts.forEach(publi => {
-    postAdded.appendChild(listPosts(publi))
+    postAdded.appendChild(listPosts(publi));
   })
   
-  return div
+  return div;
 };

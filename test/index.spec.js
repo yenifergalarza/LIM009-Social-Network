@@ -33,35 +33,35 @@ describe('funcRegister', () => {
   });
 });
 
-// describe('funcFacebook', () => {
-//   it('deberia poder ingresar con facebook', (done) => {
-//     funcFacebook()
-//       .then((user) => {
-//         expect(user.providerData[0].providerId).toBe('facebook.com')
-//         done()
-//       });
-//   });
-// });
+describe('funcFacebook', () => {
+  it('deberia poder ingresar con facebook', (done) => {
+    funcFacebook()
+      .then((user) => {
+        expect(user.providerData[0].providerId).toBe('facebook.com')
+        done()
+      });
+  });
+});
 
-// describe('funcGoogle', () => {
-//   it('deberia poder ingresar con googÄºe', (done) => {
-//     funcGoogle()
-//       .then((user) => {
-//         expect(user.providerData[0].providerId).toBe('google.com')
-//         done()
-//       })
-//   });
-// });
+describe('funcGoogle', () => {
+  it('deberia poder ingresar con googÄºe', (done) => {
+    funcGoogle()
+      .then((user) => {
+        expect(user.providerData[0].providerId).toBe('google.com')
+        done()
+      })
+  });
+});
 
-// describe('signOut', () => {
-//   it('no deberia retornar ningun usuario', (done) => {
-//     signOut()
-//       .then(user => {
-//         expect(user).toBe(undefined);
-//         done()
-//       })
-//   })
-// });
+describe('signOut', () => {
+  it('no deberia retornar ningun usuario', (done) => {
+    signOut()
+      .then(user => {
+        expect(user).toBe(undefined);
+        done()
+      })
+  })
+});
 
 describe('activeUser', () => {
   it.only('deberia identificar si el usuario se encuentra activo', (done) => {
@@ -78,3 +78,4 @@ describe('activeUser', () => {
    /*  }) */
     })
 })
+
