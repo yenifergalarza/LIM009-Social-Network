@@ -1,4 +1,4 @@
-import { getRealTimeData, addPost, deletePost, editPost } from '../controller-firebase/posts.js'
+import { getRealTimeData, addPost, deletePost, editPost, getImagePost } from '../controller-firebase/posts.js'
 import { likePlus, privacyPost } from '../controller-firebase/posts-actions.js'
 import { updateUser } from '../controller-firebase/user-profie.js'
 
@@ -15,12 +15,18 @@ export const getUser = (cb) => {
 
 export const addNewPost = (input, privacy) => {
   const user = currentUser()
-  addPost(input, user.displayName, user.uid, 0, privacy)
-  .then(ref => {
-    console.log('Added document with ID: ', ref.id);
-  });
+  addPost(input, user.displayName, user.uid, 0, privacy, null)
+    .then(ref => {
+      console.log('Added document with ID: ', ref.id);
+    });
 }
 
+export const getImage = (file) => {
+  getImagePost(file, downloadURL => {
+    console.log('available at', downloadURL);
+
+  })
+}
 
 export const deletePosts = (publi) => {
   if (currentUser().uid === publi.doc.uid) {
