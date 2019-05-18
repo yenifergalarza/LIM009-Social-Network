@@ -1,4 +1,4 @@
-import { funcRegister, funcLogin, funcGoogle, funcFacebook, signOut, activeUser, currentUser } from '../controller-firebase/auth.js';
+import { funcRegister, funcLogin, funcGoogle, funcFacebook, signOut } from '../controller-firebase/auth.js';
 import { getUserData } from '../controller-firebase/firestore.js'
 
 const changeHash = (hash) => {
@@ -10,22 +10,6 @@ export const signOutUser = () => {
   changeHash('#')
 }
 
-const getUserInfo = cb => {
-  if(currentUser()) {
-    cb(currentUser());
-  }
-
-  const unsubscribe = () => {
-    activeUser( user => {
-      if(user){
-        cb(user)
-      } else {
-
-      }
-    });
-    unsubscribe();
-  }
-}
 
 const ShowErrorMessaggeDom = (error) => {
   const pError = document.getElementsByTagName('p')[0];

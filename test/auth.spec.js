@@ -10,7 +10,7 @@ mockauth.autoFlush();
 // import MockFirebase from '../_mocks_/firebase-mock.js';
 // global.firebase = MockFirebase();
 
-import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser } from "../src/lib/controller-firebase/auth.js";
+import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser, currentUser } from "../src/lib/controller-firebase/auth.js";
 
 describe('funcLogin', () => {
   it('deberia retornar el email: abc@gmail.com', (done) => {
@@ -44,7 +44,7 @@ describe('funcFacebook', () => {
 });
 
 describe('funcGoogle', () => {
-  it('deberia poder ingresar con googÄºe', (done) => {
+  it('deberia poder ingresar con google', (done) => {
     funcGoogle()
       .then((user) => {
         expect(user.providerData[0].providerId).toBe('google.com')
@@ -65,16 +65,22 @@ describe('signOut', () => {
 
 // describe('activeUser', () => {
 //   it.only('deberia identificar si el usuario se encuentra activo', (done) => {
-
-//    /*  return funcRegister('login@gmail.com', '123456')
-//     .then(() => { */
-//       const callback = user => {
-//         console.log(user)
-//         expect(user).toBe(null)
-//         done()
-//       }
-
-//       activeUser(callback)
-//    /*  }) */
+//       const callback = user => {  
+//           expect(user.email).toEqual(null)
+//           done()
+//         }
+//         funcLogin('login@gmail.com', '123456')
+//         return activeUser(callback)
 //     })
 // })
+
+describe('currentUser', () => {
+    it('deberia tener usuario activo', (done) => {
+         funcLogin('login@gmail.com', '123456')
+        .then(()=> {
+            const user = currentUser();
+            expect(user.email).toEqual('login@gmail.com');
+            done()
+        })
+    } )
+})
