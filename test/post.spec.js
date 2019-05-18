@@ -14,7 +14,8 @@ likes: 0,post : "hola",privacy :"private",state : true,uid :"mZlFTubNrZPWBPQeMxU
         }
       }
     }
-    const user = {displayName:"juanita"};
+    const user = {displayName:"juanita",
+uid:123};
   
   global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
   
