@@ -1,4 +1,7 @@
-import { getRealTimeData, addPost, deletePost, editPost, likePlus, updateUser, privacyPost } from '../controller-firebase/firestore.js'
+import { getRealTimeData, addPost, deletePost, editPost } from '../controller-firebase/posts.js'
+import { likePlus, privacyPost } from '../controller-firebase/posts-actions.js'
+import { updateUser } from '../controller-firebase/user-profie.js'
+
 import { currentUser } from '../controller-firebase/auth.js';
 
 export const getUser = (cb) => {
@@ -12,7 +15,10 @@ export const getUser = (cb) => {
 
 export const addNewPost = (input, privacy) => {
   const user = currentUser()
-  addPost(input, user, 0, privacy);
+  addPost(input, user.displayName, user.uid, 0, privacy)
+  .then(ref => {
+    console.log('Added document with ID: ', ref.id);
+  });
 }
 
 

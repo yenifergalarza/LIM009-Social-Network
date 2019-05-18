@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName, editPrivacy} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName} from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 
 
@@ -19,8 +19,7 @@ const listPosts = (publi) => {
       <div class="color-post">
         <div class="container-click reaction">
           <div type="button" id="like" class="button-like click button-icon"> ${publi.doc.likes} </div>
-          <div id="edit" class=" button-paperPlane click button-icon"></div>
-          <button id="edit" class=" button-like click button-icon"> Editar </button>
+          <div id="edit" class=" button-paperPlane click button-icon">Editar</div>
           </div>
           
           <select name="privacy" id="edit-privacy"> 
@@ -114,7 +113,7 @@ buttonActionChange.addEventListener('click',()=>{
   });
 
   add.addEventListener('click', () => {
-    addNewPost(comment, privacy.value);
+    addNewPost(comment.value, privacy.value)
   });
 
   posts.forEach(publi => {

@@ -1,6 +1,6 @@
 import { components } from "./ui/index.js";
 import { activeUser, currentUser } from "./lib/controller-firebase/auth.js"
-import { getRealTimePost } from './lib/controller-firebase/firestore.js'
+import { getRealTimePost } from './lib/controller-firebase/posts.js'
 
 const changeRoute = (hash) => {
   console.log(hash);
