@@ -14,12 +14,15 @@ const listPosts = (publi) => {
 
       <div class="font-size-post text-post"> ${publi.doc.post}</div>
       <input id="update-data" value= ${publi.doc.post} />
-      <button id="edit"> Editar </button>
+      
 
       <div class="color-post">
         <div class="container-click reaction">
           <div type="button" id="like" class="button-like click button-icon"> ${publi.doc.likes} </div>
           <div id="edit" class=" button-paperPlane click button-icon"></div>
+          <button id="edit" class=" button-like click button-icon"> Editar </button>
+          </div>
+          
           <select name="privacy" id="edit-privacy"> 
             <option value="public">Público </option>
             <option value="private">Solo yo</option>
@@ -36,11 +39,11 @@ const listPosts = (publi) => {
   like.addEventListener('click', () => addingLikes(publi, numberLike++));
 
   const btnDelete = div.querySelector('#delete');
-  btnDelete.addEventListener('click', () => deletePosts(publi))
+  btnDelete.addEventListener('click', () => deletePosts(publi));
 
   const btnEdit = div.querySelector('#edit');
-  const updateData = div.querySelector('#update-data')
-  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value))
+  const updateData = div.querySelector('#update-data');
+  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value));
 
   const privacy = div.querySelector('#edit-privacy');
   // privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))

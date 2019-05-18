@@ -7,6 +7,10 @@
   color: #444444;
 }
 
+#inputName{
+  width: 100%;
+}
+
 .main{
  background-color: #f7f7f7;
 }
@@ -70,6 +74,7 @@ input:focus {
   font-size: 16px;
 }
 
+
 .button-pass {
   padding-top: 0.5em;
   border: none;
@@ -110,10 +115,12 @@ a:visited {
   color: #dc5f5f;
   height: 100%;
 }
+
 @media (min-width: 372px) {
   .button-pass {
     left: 13%;
   }
+
 }
 @media (min-width: 420px) {
   .button-pass {
@@ -281,7 +288,7 @@ a:visited {
   .user-photo{
   height: 100px;
   border-radius: 50%;
-  width: 100px
+  width: 110px;
   }
   
   .container-user{
@@ -366,10 +373,9 @@ a:visited {
   
   }
   .reaction {
-  padding: 5%;
-  position: relative;
-  width: 29%;
-  
+    padding: 5%;
+    position: relative;
+    width: 97%;
   }
   .color-post {
   
@@ -464,11 +470,7 @@ a:visited {
   background-color: #fff;
   border-color: #e6e6e6;
   }
-  .user-photo-name {
-  
-  display: flex;
-  width: 100%;
-  }
+
   .posts {
   width: 45%;
   }
@@ -476,10 +478,9 @@ a:visited {
   
   height: 20%;}
   .reaction {
-  
-  padding: 2%;
-  width: 20%;
-  }
+    padding: 2%;
+    width: 50%;
+}
   .text-user {
   
   padding: 8%;

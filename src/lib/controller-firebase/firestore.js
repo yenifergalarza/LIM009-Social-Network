@@ -5,11 +5,7 @@ export const getUserData = (user) => {
     email: user.email,
     photo: user.photoURL,
     uid: user.uid
-  }).then(() => {
-    console.log('Status saved')
-  }).catch((error) => {
-    console.log(error)
-  })
+  });
 }
 
 export const getRealTimeData = (uid, cb) => {
@@ -46,21 +42,13 @@ export const getRealTimePost = (cb) => {
 export const deletePost = (id) => {
   const firestore = firebase.firestore();
   return firestore.collection('posts').doc(id).delete()
-    .then(() => {
-      console.log("Document successfully deleted!");
-    })
-
 }
 
 export const editPost = (id, input) => {
   const firestore = firebase.firestore();
   return firestore.collection('posts').doc(id).update({
     post: input
-  }).then(() => {
-    console.log('updated!')
-  }).catch(() => {
-    console.log('wrong!')
-  })
+  });
 }
 
 export const privacyPost = (id, privacyState) => {
@@ -81,11 +69,7 @@ export const updateUser = (user, newName) => {
   const firestore = firebase.firestore();
   return firestore.doc(`users/${user.uid}`).update({
     name: newName
-  }).then(() => {
-    console.log('new userdata saved')
-  }).catch((error) => {
-    console.log(error)
-  })
+  });
 }
 
 /*
