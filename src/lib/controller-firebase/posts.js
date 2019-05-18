@@ -51,27 +51,6 @@ export const editPost = (id, input) => {
   });
 }
 
-export const privacyPost = (id, privacyState) => {
-  const firestore = firebase.firestore();
-  return firestore.collection('posts').doc(id).update({
-    privacy: privacyState
-  })
-}
-
-export const likePlus = (id, like) => {
-  const firestore = firebase.firestore();
-  return firestore.collection('posts').doc(id).update({
-    likes: like
-  })
-}
-
-export const updateUser = (user, newName) => {
-  const firestore = firebase.firestore();
-  return firestore.doc(`users/${user.uid}`).update({
-    name: newName
-  });
-}
-
 /*
 UI -> event -> validate inputs -> render loader -> do stuff -> hide loader -> display new UI
 */

@@ -1,5 +1,5 @@
 import { funcRegister, funcLogin, funcGoogle, funcFacebook, signOut } from '../controller-firebase/auth.js';
-import { getUserData } from '../controller-firebase/firestore.js'
+import { getUserData } from '../controller-firebase/posts.js'
 
 const changeHash = (hash) => {
   location.hash = hash;

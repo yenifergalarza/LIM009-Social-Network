@@ -1,4 +1,7 @@
-import { getRealTimeData, addPost, deletePost, editPost, likePlus, updateUser, privacyPost } from '../controller-firebase/firestore.js'
+import { getRealTimeData, addPost, deletePost, editPost } from '../controller-firebase/posts.js'
+import { likePlus, privacyPost } from '../controller-firebase/posts-actions.js'
+import { updateUser } from '../controller-firebase/user-profie.js'
+
 import { currentUser } from '../controller-firebase/auth.js';
 
 export const getUser = (cb) => {
