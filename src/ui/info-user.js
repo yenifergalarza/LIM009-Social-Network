@@ -111,7 +111,7 @@ buttonActionChange.addEventListener('click',()=>{
   });
 
   add.addEventListener('click', () => {
-    addNewPost(comment, privacy.value)
+    addNewPost(comment.value, privacy.value)
   });
 
   posts.forEach(publi => {

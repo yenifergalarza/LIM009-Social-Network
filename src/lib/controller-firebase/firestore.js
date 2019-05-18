@@ -17,21 +17,17 @@ export const getRealTimeData = (uid, cb) => {
   return firestore.collection('users').doc(uid).onSnapshot(cb)
 }
 
-export const addPost = (input, user, like, privacyState) => {
+export const addPost = (input, user, uid, like, privacyState) => {
   const firestore = firebase.firestore();
   return firestore.collection('posts').add({
-    post: input.value,
-    user: user.displayName,
-    uid: user.uid,
+    post: input,
+    user: user,
+    uid: uid,
     likes: like,
     privacy: privacyState,
     state: true,
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
   })
-    .then(ref => {
-      console.log('Added document with ID: ', ref.id);
-    })
-
 }
 
 export const getRealTimePost = (cb) => {
@@ -41,7 +37,7 @@ export const getRealTimePost = (cb) => {
     const posts = []
     snapshot.forEach(doc => {
       const data = doc.data()
-      posts.push({id: doc.id, doc:data});
+      posts.push({ id: doc.id, doc: data });
     })
     cb(posts)
   })

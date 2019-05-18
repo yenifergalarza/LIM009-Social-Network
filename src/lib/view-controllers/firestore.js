@@ -12,7 +12,10 @@ export const getUser = (cb) => {
 
 export const addNewPost = (input, privacy) => {
   const user = currentUser()
-  addPost(input, user, 0, privacy);
+  addPost(input, user.displayName, user.uid, 0, privacy)
+  .then(ref => {
+    console.log('Added document with ID: ', ref.id);
+  });
 }
 
 
