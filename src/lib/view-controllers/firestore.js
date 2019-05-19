@@ -24,7 +24,6 @@ export const addNewPost = (input, privacy) => {
 export const getImage = (file) => {
   getImagePost(file, downloadURL => {
     console.log('available at', downloadURL);
-
   })
 }
 
