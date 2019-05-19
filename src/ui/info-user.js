@@ -1,6 +1,8 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage } from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
+// import { getImagePost } from '../lib/controller-firebase/posts.js';
+
 
 
 const listPosts = (publi) => {
@@ -68,7 +70,9 @@ export const Content = (posts) => {
       <div class="edit-post post ">
         <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
         <div class="container-click">
-          <div type="button" id="add-image" class="button-photo click button-icon"></div>
+          <label for="image-file"  class="button-photo click button-icon">
+            <input type="file" id="image-file">
+          </label>
           <select name="privacy" id="select-privacy"> 
             <option value="public">Público </option>
             <option value="private">Solo yo</option>
@@ -88,7 +92,7 @@ export const Content = (posts) => {
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
-
+  const imageFile = div.querySelector('#image-file')
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
@@ -105,22 +109,30 @@ export const Content = (posts) => {
       <p>developer jr</p>
   `;
 
-const buttonActionChange = printinfo.querySelector('#changeName');
-buttonActionChange.addEventListener('click',()=>{
-  const inputNewName =  printinfo.querySelector("#inputName"); 
-  updateUserDataName(myData,inputNewName.value);
-})
+    const buttonActionChange = printinfo.querySelector('#changeName');
+    buttonActionChange.addEventListener('click', () => {
+      const inputNewName = printinfo.querySelector("#inputName");
+      updateUserDataName(myData, inputNewName.value);
+    })
   });
 
   add.addEventListener('click', () => {
     addNewPost(comment.value, privacy.value)
   });
+  // const postId = posts.find(post =>{
+  //   return post.doc.id == currentUser.uid
+  // })
+  // console.log(postId)
 
+  imageFile.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    getImage(file)
+  })
   posts.forEach(publi => {
     console.log(publi)
-    if (publi.doc.privacy=='public') {
+    if (publi.doc.privacy == 'public') {
       postAdded.appendChild(listPosts(publi))
-    } else if (publi.doc.privacy=='private' && currentUser().uid == publi.doc.uid ) {
+    } else if (publi.doc.privacy == 'private' && currentUser().uid == publi.doc.uid) {
       postAdded.appendChild(listPosts(publi))
     }
   })
