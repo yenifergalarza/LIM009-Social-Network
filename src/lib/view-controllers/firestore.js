@@ -1,4 +1,4 @@
-import { getRealTimeData, addPost, deletePost, editPost } from '../controller-firebase/posts.js'
+import { getRealTimeData, addPost, deletePost, editPost,addPhoto } from '../controller-firebase/posts.js'
 import { likePlus, privacyPost } from '../controller-firebase/posts-actions.js'
 import { updateUser } from '../controller-firebase/user-profie.js'
 
@@ -46,4 +46,8 @@ export const addingLikes = (publi, like) => {
 
 export const updateUserDataName = (user, data) => {
   updateUser(user, data)
+}
+
+export const addingPhotos = (photo) => {
+  addPhoto(photo)
 }

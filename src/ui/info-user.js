@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName} from '../lib/view-controllers/firestore.js';
+import { addNewPost, getUser, deletePosts, editPosts ,addingLikes,updateUserDataName,addingPhotos} from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 
 
@@ -18,7 +18,7 @@ const listPosts = (publi) => {
 
       <div class="color-post">
         <div class="container-click reaction">
-          <div type="button" id="like" class="button-like click button-icon"> ${publi.doc.likes} </div>
+          <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}> ${publi.doc.likes} </div>
           <div id="edit" class=" button-paperPlane click button-icon">Editar</div>
           </div>
           
@@ -32,10 +32,10 @@ const listPosts = (publi) => {
   `
   div.innerHTML = publicacion;
 
-  const like = div.querySelector('#like');
-  let numberLike = 0;
+  const like = div.querySelector('.button-like');
+  let numberLike = Number(like.dataset.value);
 
-  like.addEventListener('click', () => addingLikes(publi, numberLike++));
+  like.addEventListener('click', () => addingLikes(publi, numberLike + 1));
 
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi));
@@ -68,7 +68,8 @@ export const Content = (posts) => {
       <div class="edit-post post ">
         <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
         <div class="container-click">
-          <div type="button" id="add-image" class="button-photo click button-icon"></div>
+        <input type="file" accept="image/*" id="add-image" class="hide">
+        <label class="button-photo click button-icon" for="add-image"> </label>
           <select name="privacy" id="select-privacy"> 
             <option value="public">Público </option>
             <option value="private">Solo yo</option>
@@ -81,13 +82,19 @@ export const Content = (posts) => {
   </div>
 
   `;
-
+const buttonAddImage = div.querySelector('#add-image')
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
   const comment = div.querySelector('#comment');
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
+  
+   buttonAddImage.addEventListener('change', function(event){
+    event.preventDefault();
+    var photo  = event.target.files[0];
+    addingPhotos(photo);
+  });
 
 
   buttonLogOut.addEventListener('click', signOutUser)

@@ -51,6 +51,17 @@ export const editPost = (id, input) => {
   });
 }
 
+ 
+
+export const addPhoto = (photo) => {
+  var refStorage = storageService.ref(`/fotos/${fotos.name}`).child(photo.name);
+  var uploadTask = refStorage.put(photo);
+
+}
+
+
+
+
 /*
 UI -> event -> validate inputs -> render loader -> do stuff -> hide loader -> display new UI
 */
