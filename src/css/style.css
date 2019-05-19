@@ -363,6 +363,17 @@ a:visited {
   border-color: #e6e6e6;
   
   }
+  .hide{
+    display: none;
+  }
+  .displayFlex{
+    display: flex;
+  }
+  .button-pencil{
+    background-image: url("/src/assets/edit.png");
+    
+    }
+    
   .button-like{
   background-image: url("/src/assets/like.png");
   

@@ -100,15 +100,21 @@ export const Content = (posts) => {
         <img class="user-photo" src="${myData.photo}" alt="">
       <div class="text-user">
       <p id="nameNeedChange"> ${myData.name}</p>
-      <input id="inputName"/>
-      <div class="button-like click button-icon" id="changeName"> </div>
+      <input id="inputName" class="hide"/>
+      <div class="button-like click button-icon" class="hide" id="changeName"> </div>
+
       <p>developer jr</p>
   `;
 
 const buttonActionChange = printinfo.querySelector('#changeName');
 buttonActionChange.addEventListener('click',()=>{
+  const nameNeedChange = printinfo.querySelector('#nameNeedChange')
   const inputNewName =  printinfo.querySelector("#inputName"); 
+  inputNewName.classList.toggle('hide');
+  if(inputNewName.value!=""){
   updateUserDataName(myData,inputNewName.value);
+    };
+    nameNeedChange.classList.toggle('hide');
 })
   });
 
