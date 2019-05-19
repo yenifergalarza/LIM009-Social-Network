@@ -1,6 +1,18 @@
-import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage } from '../lib/view-controllers/firestore.js';
-import { currentUser } from '../lib/controller-firebase/auth.js';
+import {
+  signOutUser
+} from '../lib/view-controllers/auth.js';
+import {
+  addNewPost,
+  getUser,
+  deletePosts,
+  editPosts,
+  addingLikes,
+  updateUserDataName,
+  getImage
+} from '../lib/view-controllers/firestore.js';
+import {
+  currentUser
+} from '../lib/controller-firebase/auth.js';
 
 const listPosts = (publi) => {
   const div = document.createElement('div')
@@ -38,8 +50,8 @@ const listPosts = (publi) => {
   div.innerHTML = publicacion;
 
   const postImg = div.querySelector('#photoUploaded')
-  if(publi.doc.photo !== ''){
-    postImg.innerHTML= `<img src=${publi.doc.photo} class="styleAddImage" >`
+  if (publi.doc.photo !== '') {
+    postImg.innerHTML = `<img src=${publi.doc.photo} class="styleAddImage" >`
   }
 
   const like = div.querySelector('.button-like');
@@ -78,12 +90,31 @@ const listPosts = (publi) => {
 export const Content = (posts) => {
   const div = document.createElement('div');
   div.innerHTML = `
-  <nav class="nav">
-    <div class="nav-content">
+  <nav>
+  <ul class="nav offUl">
+    <li class="nav-content firstLi">
       <div id="show-menu" class="menu"></div>
-      <h1 class="white">Welcome </h1>  
-      <button id="btn-out">Cerrar sesión</button>
-    </div>
+      <h1 class="white">Welcome </h1>
+      <div class="displayFlex hideSmall dontHide">
+      <button id="btn-out" class="click button-icon button-leave"></button>
+      <label for="btn-out" class="white">Cerrar sesión</label>
+      </div>  
+      <ul class="navLiUl offUl" id="show-this">
+      <li class="relative">
+      <a href="" class="blackBack hoverA"> <div class="displayFlex">
+      <button id="btn-out" class="click button-icon button-leave"></button>
+      <label for="btn-out" class="white">Cerrar sesión</label>
+      </div>  </a></li>
+      <li class="relative">
+      <a class="blackBack white  hoverA" href="">
+      <div class="displayFlex">
+      <button id="btn-out" class="click button-icon button-bulb"></button>
+    <span class="white"> InfoSobreProyecto</span>
+        </div>  </a> </li>
+      
+      </ul>
+    </li>
+    </ul>
   </nav>
 
   
@@ -107,6 +138,8 @@ export const Content = (posts) => {
   </div>
 
   `;
+  const showMenu = div.querySelector('#show-menu');
+  const showThis = div.querySelector('#show-this')
   const buttonAddImage = div.querySelector('#add-image')
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
@@ -115,6 +148,11 @@ export const Content = (posts) => {
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
   const imageFile = div.querySelector('#image-file')
+
+  showMenu.addEventListener('click', () => {
+
+    showThis.classList.toggle('seekAndHide')
+  });
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
@@ -125,11 +163,12 @@ export const Content = (posts) => {
       <div class="user-photo-name">
         <img class="user-photo" src="${myData.photo}" alt="">
       <div class="text-user">
-      <p id="nameNeedChange"> ${myData.name}</p>
+      <p id="nameNeedChange" class="nameTitle"> ${myData.name}</p>
       <input id="inputName" class="hide"/>
+      <p>WeBooker jr </p>
       <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>
 
-      <p>developer jr</p>
+    
   `;
 
     const buttonActionChange = printinfo.querySelector('#changeName');
