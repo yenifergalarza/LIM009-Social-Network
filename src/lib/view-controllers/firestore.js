@@ -60,3 +60,7 @@ export const addingLikes = (publi, like) => {
 export const updateUserDataName = (user, data) => {
   updateUser(user, data)
 }
+
+export const addingPhotos = (photo) => {
+  addPhoto(photo)
+}
