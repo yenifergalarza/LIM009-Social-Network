@@ -1,9 +1,6 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
 import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage } from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
-// import { getImagePost } from '../lib/controller-firebase/posts.js';
-
-
 
 const listPosts = (publi) => {
   const div = document.createElement('div')
@@ -16,7 +13,7 @@ const listPosts = (publi) => {
 
       <div class="font-size-post text-post"> ${publi.doc.post}</div>
       <input id="update-data" value= ${publi.doc.post} />
-      
+      <div id="photoUploaded"></div>     
 
       <div class="color-post">
         <div class="container-click reaction">
@@ -34,6 +31,10 @@ const listPosts = (publi) => {
   `
   div.innerHTML = publicacion;
 
+  const postImg = div.querySelector('#photoUploaded')
+  if(publi.doc.photo !== ''){
+    postImg.innerHTML= `<img src=${publi.doc.photo} height=150px >`
+  }
   const like = div.querySelector('#like');
   let numberLike = 0;
 
@@ -116,20 +117,19 @@ export const Content = (posts) => {
     })
   });
 
+  imageFile.addEventListener('change', (event) => {
+    const file = event.target.files;
+    getImage(file)
+  })
   add.addEventListener('click', () => {
-    addNewPost(comment.value, privacy.value)
+    const file = imageFile.files.length
+    addNewPost(comment.value, privacy.value, file)
   });
   // const postId = posts.find(post =>{
   //   return post.doc.id == currentUser.uid
   // })
   // console.log(postId)
-
-  imageFile.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    getImage(file)
-  })
   posts.forEach(publi => {
-    console.log(publi)
     if (publi.doc.privacy == 'public') {
       postAdded.appendChild(listPosts(publi))
     } else if (publi.doc.privacy == 'private' && currentUser().uid == publi.doc.uid) {
