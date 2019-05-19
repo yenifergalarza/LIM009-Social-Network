@@ -12,17 +12,23 @@ const listPosts = (publi) => {
         <div class="cross" id="delete"></div>
       </div>
 
-      <div class="font-size-post text-post"> ${publi.doc.post}</div>
-      <input id="update-data" value= ${publi.doc.post} />
+      <div class="font-size-post px-6" id="post-message"> ${publi.doc.post}</div>
+      <input id="update-data" class="hide px-6" value= ${publi.doc.post} />
       
 
       <div class="color-post">
         <div class="container-click reaction">
-          <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}> ${publi.doc.likes} </div>
-          <div id="edit" class=" button-paperPlane click button-icon">Editar</div>
+        <div class="displayFlex w-30"> 
+        <label class="lineCenter">${publi.doc.likes}</label>
+        <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}>  </div>
+        
+        </div>
+         
+          <div id="edit" class=" button-pencil click button-icon">Editar</div>
+          <div id="reply" class=" button-paperPlane click button-icon">reply</div>
           </div>
           
-          <select name="privacy" id="edit-privacy"> 
+          <select name="privacy" id="edit-privacy" class="ml-39"> 
             <option value="public">Público </option>
             <option value="private">Solo yo</option>
           </select>
@@ -41,9 +47,24 @@ const listPosts = (publi) => {
   btnDelete.addEventListener('click', () => deletePosts(publi));
 
   const btnEdit = div.querySelector('#edit');
-  const updateData = div.querySelector('#update-data');
-  btnEdit.addEventListener('click', () => editPosts(publi, updateData.value));
+ 
 
+
+  btnEdit.addEventListener('click',()=>{
+    const textPost = div.querySelector('#post-message');
+    const updateData =  div.querySelector("#update-data"); 
+    updateData.classList.toggle('hide');
+    if(updateData.value!=""){
+      editPosts(publi, updateData.value);
+      };
+      textPost.classList.toggle('hide');
+  });
+
+
+
+
+
+  
   const privacy = div.querySelector('#edit-privacy');
   // privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
 
@@ -108,7 +129,7 @@ const buttonAddImage = div.querySelector('#add-image')
       <div class="text-user">
       <p id="nameNeedChange"> ${myData.name}</p>
       <input id="inputName" class="hide"/>
-      <div class="button-like click button-icon" class="hide" id="changeName"> </div>
+      <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>
 
       <p>developer jr</p>
   `;
