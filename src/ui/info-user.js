@@ -57,24 +57,24 @@ const listPosts = (publi) => {
   btnDelete.addEventListener('click', () => deletePosts(publi));
 
   const btnEdit = div.querySelector('#edit');
- 
 
 
-  btnEdit.addEventListener('click',()=>{
+
+  btnEdit.addEventListener('click', () => {
     const textPost = div.querySelector('#post-message');
-    const updateData =  div.querySelector("#update-data"); 
+    const updateData = div.querySelector("#update-data");
     updateData.classList.toggle('hide');
-    if(updateData.value!=""){
+    if (updateData.value != "") {
       editPosts(publi, updateData.value);
-      };
-      textPost.classList.toggle('hide');
+    };
+    textPost.classList.toggle('hide');
   });
 
 
 
 
 
-  
+
   const privacy = div.querySelector('#edit-privacy');
   // privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
 
@@ -113,7 +113,7 @@ export const Content = (posts) => {
   </div>
 
   `;
-const buttonAddImage = div.querySelector('#add-image')
+  const buttonAddImage = div.querySelector('#add-image')
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
   const comment = div.querySelector('#comment');
@@ -138,16 +138,16 @@ const buttonAddImage = div.querySelector('#add-image')
       <p>developer jr</p>
   `;
 
-const buttonActionChange = printinfo.querySelector('#changeName');
-buttonActionChange.addEventListener('click',()=>{
-  const nameNeedChange = printinfo.querySelector('#nameNeedChange')
-  const inputNewName =  printinfo.querySelector("#inputName"); 
-  inputNewName.classList.toggle('hide');
-  if(inputNewName.value!=""){
-  updateUserDataName(myData,inputNewName.value);
-    };
-    nameNeedChange.classList.toggle('hide');
-})
+    const buttonActionChange = printinfo.querySelector('#changeName');
+    buttonActionChange.addEventListener('click', () => {
+      const nameNeedChange = printinfo.querySelector('#nameNeedChange')
+      const inputNewName = printinfo.querySelector("#inputName");
+      inputNewName.classList.toggle('hide');
+      if (inputNewName.value != "") {
+        updateUserDataName(myData, inputNewName.value);
+      };
+      nameNeedChange.classList.toggle('hide');
+    })
   });
 
   imageFile.addEventListener('change', (event) => {
