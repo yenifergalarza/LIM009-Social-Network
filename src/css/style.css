@@ -482,8 +482,8 @@ padding-right: 4%;
   .container-user {
   
   flex-wrap: wrap;
-  width: 30%;
-  height: 30vh;
+  width: 40%;
+    height: 30vh;
   border: solid 1px;
   border-radius: 11px;
   padding: 0px;
@@ -511,7 +511,7 @@ padding-right: 4%;
   padding-bottom: 0px;
   }
   .user-photo{
-  padding-left: 4%;
+  padding-left: 2%;
   top: 5%;
   position: relative;
   }

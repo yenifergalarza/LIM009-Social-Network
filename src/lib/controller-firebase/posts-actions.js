@@ -13,3 +13,11 @@ export const likePlus = (id, like) => {
 }
 
 
+export const addComment = (input, user, uid, like, privacyState,postFatherId) => {
+    return firestore().collection(`/posts/${postFatherId}/comments`).add({  post: input,
+        user: user,
+        uid: uid,
+        likes: like,
+        privacy: privacyState})
+  }
+  

@@ -1,5 +1,5 @@
 import { getRealTimeData, addPost, deletePost, editPost, getImagePost } from '../controller-firebase/posts.js'
-import { likePlus, privacyPost } from '../controller-firebase/posts-actions.js'
+import { likePlus, privacyPost, addComment} from '../controller-firebase/posts-actions.js'
 import { updateUser } from '../controller-firebase/user-profie.js'
 
 import { currentUser } from '../controller-firebase/auth.js';
@@ -56,4 +56,8 @@ export const updateUserDataName = (user, data) => {
 
 export const addingPhotos = (photo) => {
   addPhoto(photo)
+}
+
+export const addReply =(input, user, uid, like, privacyState,postFatherId)=>{
+  addComment(input, user, uid, like, privacyState,postFatherId);
 }
