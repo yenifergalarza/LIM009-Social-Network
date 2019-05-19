@@ -13,7 +13,7 @@ export const getRealTimeData = (uid, cb) => {
   return firestore.collection('users').doc(uid).onSnapshot(cb)
 }
 
-export const addPost = (input, user, uid, like, privacyState) => {
+export const addPost = (input, user, uid, like, privacyState, photoUrl) => {
   const firestore = firebase.firestore();
   return firestore.collection('posts').add({
     post: input,
@@ -21,8 +21,7 @@ export const addPost = (input, user, uid, like, privacyState) => {
     uid: uid,
     likes: like,
     privacy: privacyState,
-    state: true,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    photo: photoUrl,
   })
 }
 
@@ -51,16 +50,21 @@ export const editPost = (id, input) => {
   });
 }
 
- 
+export const getImagePost = (file, cb) => {
+  //create ref
+  const storageRef = firebase.storage().ref()
+  const imageRef = storageRef.child(`images/${file.name}`)
 
-export const addPhoto = (photo) => {
-  var refStorage = storageService.ref(`/fotos/${fotos.name}`).child(photo.name);
-  var uploadTask = refStorage.put(photo);
-
+  //update file to fb storage
+  const task = imageRef.put(file)
+  return task.on('state_changed', (snapshot) => {
+  }, (error) => {
+  }, () => {
+    //get updated img url 
+    const downloadImg = task.snapshot.ref.getDownloadURL()
+    downloadImg.then(cb)
+  })
 }
-
-
-
 
 /*
 UI -> event -> validate inputs -> render loader -> do stuff -> hide loader -> display new UI
