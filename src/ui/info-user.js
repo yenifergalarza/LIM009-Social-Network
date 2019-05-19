@@ -22,37 +22,45 @@ const listPosts = (publi) => {
         <h3 class="font-size-post white ">Publicado por <span>${publi.doc.user}</span> </h3>
         <div class="cross" id="delete"></div>
       </div>
-
-      <div class="font-size-post px-6" id="post-message"> ${publi.doc.post}</div>
-      <input id="update-data" class="hide px-6" value= ${publi.doc.post} />
-      <div id="photoUploaded"></div>     
-
+      <div>
+        <div class="font-size-post px-6" id="post-message"> ${publi.doc.post}</div>
+        <input id="update-data" class="hide px-6" value= ${publi.doc.post} />
+        <div id="photoUploaded"></div>     
+      </div>
       <div class="color-post">
         <div class="container-click reaction">
-        <div class="displayFlex w-30"> 
-        <label class="lineCenter">${publi.doc.likes}</label>
-        <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}>  </div>
-        
-        </div>
+          <div class="displayFlex w-30"> 
+            <label class="lineCenter">${publi.doc.likes}</label>
+            <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}>${publi.doc.likes}</div>
+          </div>
          
           <div id="edit" class=" button-pencil click button-icon">Editar</div>
           <div id="reply" class=" button-paperPlane click button-icon">reply</div>
-          </div>
-          
-          <select name="privacy" id="edit-privacy" class="ml-39"> 
-            <option value="public">Público </option>
-            <option value="private">Solo yo</option>
-          </select>
         </div>
+          
+        <select name="privacy" id="edit-privacy" class="ml-39"> 
+          <option value="public">Público </option>
+          <option value="private">Solo yo</option>
+        </select>
       </div>
     </div>
   `
   div.innerHTML = publicacion;
 
   const postImg = div.querySelector('#photoUploaded')
-  if (publi.doc.photo !== '') {
-    postImg.innerHTML = `<img src=${publi.doc.photo} class="styleAddImage" >`
+
+  if(publi.doc.photo !== ''){
+    const image = document.createElement('img')
+    image.setAttribute('src', publi.doc.photo)
+    image.setAttribute('height', '150px');
+    image.classList.add('styleAddImage');
+  
+    postImg.appendChild(image)
   }
+
+  // if(publi.doc.photo !== ''){
+  //   postImg.innerHTML= `<img src=${publi.doc.photo} height=150px >`
+  // }
 
   const like = div.querySelector('.button-like');
   let numberLike = Number(like.dataset.value);
