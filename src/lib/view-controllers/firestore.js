@@ -13,21 +13,28 @@ export const getUser = (cb) => {
   });
 }
 
-export const addNewPost = (input, privacy) => {
+
+let newimg = ''
+export const getImage = (file) => {
+  getImagePost(file[0], downloadURL => {
+    console.log('available at', downloadURL);
+    if (file.length!==0) {
+      newimg = downloadURL
+    } 
+  })
+}
+
+export const addNewPost = (input, privacy, file) => {
   const user = currentUser()
-  addPost(input, user.displayName, user.uid, 0, privacy, null)
+  let photoImg = ''
+  if (file!==0){
+    photoImg = newimg
+  } 
+  addPost(input, user.displayName, user.uid, 0, privacy, photoImg)
     .then(ref => {
       console.log('Added document with ID: ', ref.id);
     });
 }
-
-export const getImage = (file) => {
-  getImagePost(file, downloadURL => {
-    console.log('available at', downloadURL);
-
-  })
-}
-
 export const deletePosts = (publi) => {
   if (currentUser().uid === publi.doc.uid) {
     deletePost(publi.id)
