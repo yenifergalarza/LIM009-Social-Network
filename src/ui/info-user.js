@@ -31,7 +31,7 @@ const listPosts = (publi) => {
         <div class="container-click reaction">
           <div class="displayFlex w-30"> 
             <label class="lineCenter">${publi.doc.likes}</label>
-            <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}>${publi.doc.likes}</div>
+            <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}></div>
           </div>
          
           <div id="edit" class=" button-pencil click button-icon">Editar</div>
