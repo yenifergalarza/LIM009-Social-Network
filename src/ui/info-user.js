@@ -39,7 +39,7 @@ const listPosts = (publi) => {
 
   const postImg = div.querySelector('#photoUploaded')
   if(publi.doc.photo !== ''){
-    postImg.innerHTML= `<img src=${publi.doc.photo} height=150px >`
+    postImg.innerHTML= `<img src=${publi.doc.photo} class="styleAddImage" >`
   }
 
   const like = div.querySelector('.button-like');

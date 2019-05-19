@@ -536,3 +536,10 @@ padding-right: 4%;
 
     padding: 6%;
 }
+
+.styleAddImage {
+  position: relative;
+  width: 90%;
+  margin: 5%;
+  height: auto;
+}
