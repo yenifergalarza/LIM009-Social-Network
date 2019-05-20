@@ -41,20 +41,20 @@ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled
 
 
 
-describe('editar nombre de usuario', () => {
-  it('deberia nuevo nombre', (done) => {
+// describe('editar nombre de usuario', () => {
+//   it('deberia nuevo nombre', (done) => {
      
-    return updateUser({
-        displayName: 'Yeni',
-        email: 'yeni333@gmail.com',
-        photoURL: 'yeni.jpg',
-        uid: 'abcXXX123'
-      }, 'juanita').then(() => {
-      const callback = (user) => {
-        expect(user.doc.displayName).toEqual('juanita')
-        done()
-      }
-      getRealTimePost(callback)
-    })
-  })
-})
+//     return updateUser({
+//         displayName: 'Yeni',
+//         email: 'yeni333@gmail.com',
+//         photoURL: 'yeni.jpg',
+//         uid: 'abcXXX123'
+//       }, 'juanita').then(() => {
+//       const callback = (user) => {
+//         expect(user.doc.displayName).toEqual('juanita')
+//         done()
+//       }
+//       getRealTimePost(callback)
+//     })
+//   })
+// })

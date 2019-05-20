@@ -67,18 +67,18 @@ describe('editar post', () => {
 })
 
 
-describe('agregar comentario', () => {
-    it('deberia agregar un comentario ', (done) => {
-      return addComment('Dame croquetas', 'Sillao el chihuahua', 'abc123', 1, 'public',mZlFTubNrZPWBPQeMxUVoXX0exy1).then(() => {
-        const callback = (notes) => {
-          const result = notes.filter((note) => {
-            return note.doc.post === 'Dame croquetas';
-          })
-          expect(result[0].doc.post).toBe('Dame croquetas');
-          done()
-        }
-        getRealTimePost(callback)
-      })
-    })
-  })
+// describe('agregar comentario', () => {
+//     it('deberia agregar un comentario ', (done) => {
+//       return addComment('Dame croquetas', 'Sillao el chihuahua', 'abc123', 1, 'public',mZlFTubNrZPWBPQeMxUVoXX0exy1).then(() => {
+//         const callback = (notes) => {
+//           const result = notes.filter((note) => {
+//             return note.doc.post === 'Dame croquetas';
+//           })
+//           expect(result[0].doc.post).toBe('Dame croquetas');
+//           done()
+//         }
+//         getRealTimePost(callback)
+//       })
+//     })
+//   })
   

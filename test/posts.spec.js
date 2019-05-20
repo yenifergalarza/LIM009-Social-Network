@@ -18,19 +18,21 @@ const fixtureData = {
         123456: {
           likes: 0,
           post: "hola",
+          photo: "yeni.jpg",
           privacy: "private",
-          state: true,
           uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-          user: "Yeni"
+          user: "Yeni",
+          date: {seconds: 1558322863, nanoseconds: 816000000}
         }
       },
       234567: {
         likes: 0,
         post: "adios",
+        photo: "perlita.jpg",
         privacy: "public",
-        state: true,
         uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-        user: "perlita"
+        user: "perlita",
+        date: {seconds: 1558310759, nanoseconds: 213000000}
       },
     }
   }
@@ -59,7 +61,7 @@ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled
 
 describe('agregar', () => {
   it('deberia agregar un post ', (done) => {
-    return addPost('quiero leer', 'Kath Montalvo', 'abc123', 1, 'public').then(() => {
+    return addPost('quiero leer', 'Kath Montalvo', 'abc123', 1, 'public', 'leer.jpg').then(() => {
       const callback = (notes) => {
         const result = notes.filter((note) => {
           return note.doc.post === 'quiero leer';
