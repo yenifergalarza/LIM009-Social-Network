@@ -1,6 +1,8 @@
-import MockFirebase from 'mock-cloud-firestore';
-import { privacyPost, likePlus } from "../src/lib/controller-firebase/posts-actions";
 
+import { privacyPost, likePlus,addComment } from "../src/lib/controller-firebase/posts-actions";
+import { getRealTimePost} from "../src/lib/controller-firebase/posts.js";
+
+import MockFirebase from 'mock-cloud-firestore';
 const fixtureData = {
     __collection__: {
         users: {
@@ -63,3 +65,20 @@ describe('editar post', () => {
         })
     })
 })
+
+
+describe('agregar comentario', () => {
+    it('deberia agregar un comentario ', (done) => {
+      return addComment('Dame croquetas', 'Sillao el chihuahua', 'abc123', 1, 'public',mZlFTubNrZPWBPQeMxUVoXX0exy1).then(() => {
+        const callback = (notes) => {
+          const result = notes.filter((note) => {
+            return note.doc.post === 'Dame croquetas';
+          })
+          expect(result[0].doc.post).toBe('Dame croquetas');
+          done()
+        }
+        getRealTimePost(callback)
+      })
+    })
+  })
+  
