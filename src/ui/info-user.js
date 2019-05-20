@@ -8,7 +8,8 @@ import {
   editPosts,
   addingLikes,
   updateUserDataName,
-  getImage
+  getImage,
+  editPrivacy
 } from '../lib/view-controllers/firestore.js';
 import {
   currentUser
@@ -39,8 +40,8 @@ const listPosts = (publi) => {
         </div>
           
         <select name="privacy" id="edit-privacy" class="ml-39"> 
-          <option value="public">PÃºblico </option>
-          <option value="private">Solo yo</option>
+          <option value=${publi.doc.privacy}></option>
+          <option></option>
         </select>
       </div>
     </div>
@@ -49,16 +50,13 @@ const listPosts = (publi) => {
 
   const postImg = div.querySelector('#photoUploaded')
 
-  if(publi.doc.photo !== ''){
+  if (publi.doc.photo !== '') {
     const image = document.createElement('img')
     image.setAttribute('src', publi.doc.photo)
     image.classList.add('styleAddImage');
     postImg.appendChild(image)
   }
 
-  // if(publi.doc.photo !== ''){
-  //   postImg.innerHTML= `<img src=${publi.doc.photo} height=150px >`
-  // }
 
   const like = div.querySelector('.button-like');
   let numberLike = Number(like.dataset.value);
@@ -82,13 +80,21 @@ const listPosts = (publi) => {
     textPost.classList.toggle('hide');
   });
 
-
-
-
-
-
   const privacy = div.querySelector('#edit-privacy');
-  // privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
+
+  if (privacy.options[0].value==='public') {
+    privacy.options[0].innerHTML = 'Público'
+    privacy.options[1].setAttribute('value', 'private')
+    privacy.options[1].innerHTML = 'Solo yo'
+  } else if(privacy.options[0].value==='private'){
+    privacy.options[0].innerHTML = 'Solo yo'
+    privacy.options[1].setAttribute('value', 'public');
+    privacy.options[1].innerHTML = 'Público'
+
+  }
+
+
+  privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
 
   return div
 }
