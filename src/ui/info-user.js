@@ -52,9 +52,7 @@ const listPosts = (publi) => {
   if(publi.doc.photo !== ''){
     const image = document.createElement('img')
     image.setAttribute('src', publi.doc.photo)
-    image.setAttribute('height', '150px');
     image.classList.add('styleAddImage');
-  
     postImg.appendChild(image)
   }
 
@@ -204,6 +202,7 @@ export const Content = (posts) => {
   // })
   // console.log(postId)
   posts.forEach(publi => {
+    console.log(publi)
     if (publi.doc.privacy == 'public') {
       postAdded.appendChild(listPosts(publi))
     } else if (publi.doc.privacy == 'private' && currentUser().uid == publi.doc.uid) {

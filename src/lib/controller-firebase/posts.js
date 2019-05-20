@@ -22,12 +22,13 @@ export const addPost = (input, user, uid, like, privacyState, photoUrl) => {
     likes: like,
     privacy: privacyState,
     photo: photoUrl,
+    date: new Date()
   })
 }
 
 export const getRealTimePost = (cb) => {
   const firestore = firebase.firestore();
-  const publicPrivacy = firestore.collection('posts')
+  const publicPrivacy = firestore.collection('posts').orderBy('date', 'desc')
   publicPrivacy.onSnapshot(snapshot => {
     const posts = []
     snapshot.forEach(doc => {
