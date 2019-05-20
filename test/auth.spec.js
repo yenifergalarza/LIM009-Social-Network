@@ -63,16 +63,17 @@ describe('signOut', () => {
   })
 });
 
-// describe('activeUser', () => {
-//   it.only('deberia identificar si el usuario se encuentra activo', (done) => {
-//       const callback = user => {  
-//           expect(user.email).toEqual(null)
-//           done()
-//         }
-//         funcLogin('login@gmail.com', '123456')
-//         return activeUser(callback)
-//     })
-// })
+describe('activeUser', () => {
+  it('deberia identificar si el usuario se encuentra activo', (done) => {
+      const callback = user => {
+        console.log(user)
+          expect(user.email).toEqual('login@gmail.com')
+          done()
+        }
+        activeUser(callback)
+        funcLogin('login@gmail.com', '123456')
+    })
+})
 
 describe('currentUser', () => {
     it('deberia tener usuario activo', (done) => {

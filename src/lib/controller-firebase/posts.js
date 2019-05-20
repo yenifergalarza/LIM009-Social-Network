@@ -28,11 +28,11 @@ export const addPost = (input, user, uid, like, privacyState, photoUrl) => {
 
 export const getRealTimePost = (cb) => {
   const firestore = firebase.firestore();
-  const publicPrivacy = firestore.collection('posts').orderBy('date', 'desc')
-  publicPrivacy.onSnapshot(snapshot => {
+  const allPosts = firestore.collection('posts').orderBy('date', 'desc');
+  allPosts.onSnapshot(snapshot => {
     const posts = []
     snapshot.forEach(doc => {
-      const data = doc.data()
+      const data = doc.data();
       posts.push({ id: doc.id, doc: data });
     })
     cb(posts)

@@ -1,20 +1,19 @@
-import {
-  signOutUser
-} from '../lib/view-controllers/auth.js';
-import {
-  addNewPost,
-  getUser,
-  deletePosts,
-  editPosts,
-  addingLikes,
-  updateUserDataName,
-  getImage,
-  editPrivacy,
-  addNewComment
-} from '../lib/view-controllers/firestore.js';
-import {
-  currentUser
-} from '../lib/controller-firebase/auth.js';
+import { signOutUser } from '../lib/view-controllers/auth.js';
+import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage, editPrivacy,
+  addNewComment } from '../lib/view-controllers/firestore.js';
+import { currentUser } from '../lib/controller-firebase/auth.js';
+import { getRealTimeComment } from '../lib/controller-firebase/posts-actions.js'
+
+const listComments = (comment) =>{
+  const div = document.createElement('div')
+  console.log(comment)
+  const divComment = `
+    <div>${comment.doc.user}</div>
+    <div>${comment.doc.post}</div>
+  `
+  div.innerHTML = divComment
+  return div
+}
 
 const listPosts = (publi) => {
   const div = document.createElement('div')
@@ -52,6 +51,7 @@ const listPosts = (publi) => {
     </div>
   `
   div.innerHTML = publicacion;
+
   const reply = div.querySelector('#reply');
   const comments = div.querySelector('#comments')
   reply.addEventListener('click', () => {
@@ -59,13 +59,20 @@ const listPosts = (publi) => {
   })
 
   const inputComment = div.querySelector('#input-comment');
+  const commentPosts = div.querySelector('#comment-post')
   const btnComment = div.querySelector('#btn-comment')
   btnComment.addEventListener('click', ()=>{
-    addNewComment(inputComment, publi.id)
+    addNewComment(inputComment, publi.id);
   })
 
-  const postImg = div.querySelector('#photoUploaded');
+  getRealTimeComment(publi.id, (data) => {
+    data.forEach( comment => {
+      commentPosts.appendChild(listComments(comment))
+    })
+  })
 
+
+  const postImg = div.querySelector('#photoUploaded');
   if (publi.doc.photo !== '') {
     const image = document.createElement('img')
     image.setAttribute('src', publi.doc.photo)
