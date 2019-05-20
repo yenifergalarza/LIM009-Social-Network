@@ -9,7 +9,8 @@ import {
   addingLikes,
   updateUserDataName,
   getImage,
-  editPrivacy
+  editPrivacy,
+  addNewComment
 } from '../lib/view-controllers/firestore.js';
 import {
   currentUser
@@ -19,9 +20,14 @@ const listPosts = (publi) => {
   const div = document.createElement('div')
   const publicacion = `
     <div class="comment-post post">
+      
       <div class="owner-post">
         <h3 class="font-size-post white ">Publicado por <span>${publi.doc.user}</span> </h3>
-        <div class="cross" id="delete"></div>
+          <select name="privacy" id="edit-privacy" class="hide ml-39"> 
+            <option value=${publi.doc.privacy}></option>
+            <option></option>
+          </select>
+          <div class="cross" id="delete"></div>
       </div>
       <div>
         <div class="font-size-post px-6" id="post-message"> ${publi.doc.post}</div>
@@ -34,21 +40,31 @@ const listPosts = (publi) => {
             <label class="lineCenter">${publi.doc.likes}</label>
             <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}></div>
           </div>
-         
-          <div id="edit" class=" button-pencil click button-icon">Editar</div>
-          <div id="reply" class=" button-paperPlane click button-icon">reply</div>
+          <div id="edit-post" class="hide button-pencil click button-icon">Editar</div>
+          <div id="reply" class=" button-paperPlane click button-icon">Comentarios</div>
         </div>
-          
-        <select name="privacy" id="edit-privacy" class="ml-39"> 
-          <option value=${publi.doc.privacy}></option>
-          <option></option>
-        </select>
+        <div id="comments" class="hide">
+          <input id="input-comment" type="text" placeholder="Escribe un comentario">
+          <button id="btn-comment" type="button">Comentar </button>
+          <div id="comment-post"></div>
+        </div>
       </div>
     </div>
   `
   div.innerHTML = publicacion;
+  const reply = div.querySelector('#reply');
+  const comments = div.querySelector('#comments')
+  reply.addEventListener('click', () => {
+    comments.classList.toggle('hide')
+  })
 
-  const postImg = div.querySelector('#photoUploaded')
+  const inputComment = div.querySelector('#input-comment');
+  const btnComment = div.querySelector('#btn-comment')
+  btnComment.addEventListener('click', ()=>{
+    addNewComment(inputComment, publi.id)
+  })
+
+  const postImg = div.querySelector('#photoUploaded');
 
   if (publi.doc.photo !== '') {
     const image = document.createElement('img')
@@ -66,34 +82,32 @@ const listPosts = (publi) => {
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi));
 
-  const btnEdit = div.querySelector('#edit');
-
-
-
+  const btnEdit = div.querySelector('#edit-post');
   btnEdit.addEventListener('click', () => {
-    const textPost = div.querySelector('#post-message');
+    const textEdit = div.querySelector('#post-message');
     const updateData = div.querySelector("#update-data");
     updateData.classList.toggle('hide');
     if (updateData.value != "") {
       editPosts(publi, updateData.value);
     };
-    textPost.classList.toggle('hide');
+    textEdit.classList.toggle('hide');
   });
 
   const privacy = div.querySelector('#edit-privacy');
 
-  if (privacy.options[0].value==='public') {
-    privacy.options[0].innerHTML = 'P鷅lico'
+  if (privacy.options[0].value === 'public') {
+    privacy.options[0].innerHTML = 'P煤blico'
     privacy.options[1].setAttribute('value', 'private')
     privacy.options[1].innerHTML = 'Solo yo'
-  } else if(privacy.options[0].value==='private'){
+  } else if (privacy.options[0].value === 'private') {
     privacy.options[0].innerHTML = 'Solo yo'
     privacy.options[1].setAttribute('value', 'public');
-    privacy.options[1].innerHTML = 'P鷅lico'
-
+    privacy.options[1].innerHTML = 'P煤blico'
   }
-
-
+  if (publi.doc.uid == currentUser().uid) {
+    btnEdit.classList.remove('hide')
+    privacy.classList.remove('hide')
+  }
   privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
 
   return div
@@ -108,21 +122,27 @@ export const Content = (posts) => {
       <div id="show-menu" class="menu"></div>
       <h1 class="white">Welcome </h1>
       <div class="displayFlex hideSmall dontHide">
-      <button id="btn-out" class="click button-icon button-leave"></button>
-      <label for="btn-out" class="white">Cerrar sesi贸n</label>
+        <button id="btn-out" class="click button-icon button-leave"></button>
+        <label for="btn-out" class="white">Cerrar sesi贸n</label>
       </div>  
+      
       <ul class="navLiUl offUl" id="show-this">
-      <li class="relative">
-      <a href="" class="blackBack hoverA"> <div class="displayFlex">
-      <button id="btn-out" class="click button-icon button-leave"></button>
-      <label for="btn-out" class="white">Cerrar sesi贸n</label>
-      </div>  </a></li>
-      <li class="relative">
-      <a class="blackBack white  hoverA" href="">
-      <div class="displayFlex">
-      <button id="btn-out" class="click button-icon button-bulb"></button>
-    <span class="white"> InfoSobreProyecto</span>
-        </div>  </a> </li>
+        <li class="relative">
+          <a href="" class="blackBack hoverA"> 
+            <div class="displayFlex">
+              <button id="btn-out" class="click button-icon button-leave"></button>
+              <span class="white"> Cerrar sesi贸n </span>
+            </div>  
+          </a>
+        </li>
+        <li class="relative">
+          <a class="blackBack white  hoverA" href="">
+            <div class="displayFlex">
+              <button id="btn-out" class="click button-icon button-bulb"></button>
+              <span class="white"> InfoSobreProyecto</span>
+            </div>
+          </a>
+        </li>
       
       </ul>
     </li>
@@ -134,12 +154,12 @@ export const Content = (posts) => {
     <div class="container-user" id="print-info"></div>
     <div class="posts">
       <div class="edit-post post ">
-        <textarea name="" id="comment" cols="30" rows="10" class="write-post"></textarea>
+        <textarea name="" id="text-post" cols="30" rows="10" class="write-post"></textarea>
         <div class="container-click">
         <input type="file" accept="image/*"  id="image-file" class="hide">
         <label class="button-photo click button-icon" for="image-file"> </label>
           <select name="privacy" id="select-privacy"> 
-            <option value="public">P煤blico </option>
+            <option value="public">P煤blico</option>
             <option value="private">Solo yo</option>
           </select>
           <button id="add" class="button-share click white"> Publicar </button>
@@ -152,17 +172,15 @@ export const Content = (posts) => {
   `;
   const showMenu = div.querySelector('#show-menu');
   const showThis = div.querySelector('#show-this')
-  const buttonAddImage = div.querySelector('#add-image')
   const buttonLogOut = div.querySelector('#btn-out');
   const printinfo = div.querySelector('#print-info');
-  const comment = div.querySelector('#comment');
+  const textPost = div.querySelector('#text-post');
   const add = div.querySelector('#add');
   const postAdded = div.querySelector('#post-added');
   const privacy = div.querySelector('#select-privacy');
   const imageFile = div.querySelector('#image-file')
 
   showMenu.addEventListener('click', () => {
-
     showThis.classList.toggle('seekAndHide')
   });
 
@@ -178,9 +196,7 @@ export const Content = (posts) => {
       <p id="nameNeedChange" class="nameTitle"> ${myData.name}</p>
       <input id="inputName" class="hide"/>
       <p>WeBooker jr </p>
-      <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>
-
-    
+      <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>   
   `;
 
     const buttonActionChange = printinfo.querySelector('#changeName');
@@ -201,7 +217,7 @@ export const Content = (posts) => {
   })
   add.addEventListener('click', () => {
     const file = imageFile.files.length
-    addNewPost(comment.value, privacy.value, file)
+    addNewPost(textPost.value, privacy.value, file)
   });
   // const postId = posts.find(post =>{
   //   return post.doc.id == currentUser.uid

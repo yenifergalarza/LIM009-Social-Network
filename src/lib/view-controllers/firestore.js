@@ -35,6 +35,14 @@ export const addNewPost = (input, privacy, file) => {
       console.log('Added document with ID: ', ref.id);
     });
 }
+
+export const addNewComment = (input, id) => {
+  const user = currentUser();
+  addComment(input.value, user.displayName,user.uid, id )
+  .then(ref => {
+    console.log('Added document with ID: ', ref.id);
+  });
+}
 export const deletePosts = (publi) => {
   if (currentUser().uid === publi.doc.uid) {
     deletePost(publi.id)
@@ -65,6 +73,3 @@ export const addingPhotos = (photo) => {
   addPhoto(photo)
 }
 
-export const addReply =(input, user, uid, like, privacyState,postFatherId)=>{
-  addComment(input, user, uid, like, privacyState,postFatherId);
-}
