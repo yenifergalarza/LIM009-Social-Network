@@ -1,17 +1,34 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
 import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage, editPrivacy,
-  addNewComment } from '../lib/view-controllers/firestore.js';
+  addNewComment, deleteComments, editComments } from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 import { getRealTimeComment } from '../lib/controller-firebase/posts-actions.js'
 
 const listComments = (comment) =>{
   const div = document.createElement('div')
-  console.log(comment)
   const divComment = `
     <div>${comment.doc.user}</div>
-    <div>${comment.doc.post}</div>
+    <div id="comment-msg">${comment.doc.post}</div>
+    <input type="text" id="update-comment" class="hide">
+    <button id="edit-comment-post">Editar</button>
+    <button id="delete-comment-post">Eliminar</button>
   `
   div.innerHTML = divComment
+  const deleteCommentPost = div.querySelector('#delete-comment-post')
+  const editCommentPost = div.querySelector('#edit-comment-post')
+
+  deleteCommentPost.addEventListener('click', () => 
+  deleteComments(comment))
+
+  editCommentPost.addEventListener('click', () =>{
+    const commentMsg = div.querySelector('#comment-msg');
+    const updateComment = div.querySelector("#update-comment");
+    updateComment.classList.toggle('hide');
+    if (updateComment.value !== "") {
+      editComments(comment, updateComment.value);
+    };
+    commentMsg.classList.toggle('hide');
+  })
   return div
 }
 
@@ -66,8 +83,9 @@ const listPosts = (publi) => {
   })
 
   getRealTimeComment(publi.id, (data) => {
+    commentPosts.innerHTML = ''
     data.forEach( comment => {
-      commentPosts.appendChild(listComments(comment))
+      return commentPosts.appendChild(listComments(comment))
     })
   })
 
@@ -89,12 +107,12 @@ const listPosts = (publi) => {
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi));
 
-  const btnEdit = div.querySelector('#edit-post');
-  btnEdit.addEventListener('click', () => {
+  const btnEditPost = div.querySelector('#edit-post');
+  btnEditPost.addEventListener('click', () => {
     const textEdit = div.querySelector('#post-message');
     const updateData = div.querySelector("#update-data");
     updateData.classList.toggle('hide');
-    if (updateData.value != "") {
+    if (updateData.value !== "") {
       editPosts(publi, updateData.value);
     };
     textEdit.classList.toggle('hide');
@@ -112,7 +130,7 @@ const listPosts = (publi) => {
     privacy.options[1].innerHTML = 'Público'
   }
   if (publi.doc.uid == currentUser().uid) {
-    btnEdit.classList.remove('hide')
+    btnEditPost.classList.remove('hide')
     privacy.classList.remove('hide')
   }
   privacy.addEventListener('click', () => editPrivacy(publi, privacy.value))
@@ -211,7 +229,7 @@ export const Content = (posts) => {
       const nameNeedChange = printinfo.querySelector('#nameNeedChange')
       const inputNewName = printinfo.querySelector("#inputName");
       inputNewName.classList.toggle('hide');
-      if (inputNewName.value != "") {
+      if (inputNewName.value !== "") {
         updateUserDataName(myData, inputNewName.value);
       };
       nameNeedChange.classList.toggle('hide');
