@@ -57,7 +57,7 @@ global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled
   })
 })
 
-describe('addPost', () => {
+describe('agregar', () => {
   it('deberia agregar un post ', (done) => {
     return addPost('quiero leer', 'Kath Montalvo', 'abc123', 1, 'public').then(() => {
       const callback = (notes) => {

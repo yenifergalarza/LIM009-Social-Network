@@ -464,9 +464,8 @@ a:visited {
 
 .button-like {
     background-image: url("/src/assets/like.png");
-
+    text-indent: -90000000px;
 }
-
 .button-paperPlane {
     background-image: url("/src/assets/paper-plane.png");
 
