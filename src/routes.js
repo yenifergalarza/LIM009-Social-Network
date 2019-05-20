@@ -19,6 +19,7 @@ const changeRoute = (hash) => {
     case '#/content': {
      activeUser( () => { 
       if(currentUser()){ 
+
         getRealTimePost(posts => { 
           mainSection.innerHTML = ''
           return mainSection.appendChild(components.content(posts));

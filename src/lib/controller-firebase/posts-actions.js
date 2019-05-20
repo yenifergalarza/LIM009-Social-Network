@@ -17,11 +17,11 @@ export const addComment = (input, userName, uid, postFatherId) => {
   const firestore = firebase.firestore();
   return firestore.collection('posts').doc(postFatherId).collection('comments').add({
     post: input,
+    postId: postFatherId,
     user: userName,
     uid: uid,
     date: new Date()
   })
-  
 }
 
 export const getRealTimeComment = (postFatherId, cb)=> {
@@ -33,5 +33,17 @@ export const getRealTimeComment = (postFatherId, cb)=> {
       comment.push({id: doc.id, doc: doc.data()})
     })
     cb(comment)
+  })
+}
+
+export const deleteComment = (comment) => {
+  const firestore = firebase.firestore();
+  return firestore.collection('posts').doc(comment.doc.postId).collection('comments').doc(comment.id).delete()
+}
+
+export const editComment = (comment, input) => {
+  const firestore = firebase.firestore();
+  return firestore.collection('posts').doc(comment.doc.postId).collection('comments').doc(comment.id).update({
+    post: input
   })
 }
