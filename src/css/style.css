@@ -408,7 +408,7 @@ a:visited {
     height: 40px;
     width: 40px;
     background-repeat: no-repeat;
-    background-color: #ffd255;
+    background-color: #ef8636;
     background-position: center;
     border-radius: 72%;
 }
@@ -417,7 +417,7 @@ a:visited {
     height: 15px;
     width: 15px;
     background-repeat: no-repeat;
-    background-color: #ffd255;
+    background-color: #ef8636;
     background-position: center;
     border-radius: 72%;
 }
@@ -439,13 +439,13 @@ a:visited {
 
 .button-share {
     padding: 3%;
-    background-color: #ffd255;
+    background-color:#ef8636;
     border-radius: 16px;
     position: relative;
 }
 .button-share-comment {
     padding: 1%;
-    background-color: #ffd255;
+    background-color: #ef8636;
     border-radius: 16px;
     position: relative;
 }
@@ -696,4 +696,4 @@ a:visited {
     margin: 15px;
 
 }
-/* caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaammmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmbiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiosssssssssss */
+/*  */
