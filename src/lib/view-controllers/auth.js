@@ -49,14 +49,14 @@ export const facebookLogin = () => {
     .catch(error => ShowErrorMessaggeDom(error))
 }
 
-export const register = () => {
+export const register = (input) => {
   const emailSignIn = document.getElementById('email-signin');
   const passwordSignIn = document.getElementById('password-signin');
 
   funcRegister(emailSignIn.value, passwordSignIn.value)
     .then(result => {
       changeHash('#/content');
-      getUserData(result.user)
+      getUserData(result.user, input.value)
     })
     .catch(error => ShowErrorMessaggeDom(error))
 }

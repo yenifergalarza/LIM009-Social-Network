@@ -1,9 +1,9 @@
-export const getUserData = (user) => {
+export const getUserData = (user, input) => {
   const firestore = firebase.firestore();
   return firestore.doc(`users/${user.uid}`).set({
-    name: user.displayName,
+    name: user.displayName || input,
     email: user.email,
-    photo: user.photoURL,
+    photo: user.photoURL || 'assets/default-user.png',
     uid: user.uid
   });
 }

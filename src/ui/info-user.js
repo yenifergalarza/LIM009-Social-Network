@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { addNewPost, getUser, deletePosts, editPosts, addingLikes, updateUserDataName, getImage, editPrivacy,
+import { addNewPost, getUser, deletePosts, editPosts, toggleLikes, updateUserDataName, getImage, editPrivacy,
   addNewComment, deleteComments, editComments } from '../lib/view-controllers/firestore.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 import { getRealTimeComment } from '../lib/controller-firebase/posts-actions.js'
@@ -53,8 +53,8 @@ const listPosts = (publi) => {
       <div class="color-post">
         <div class="container-click reaction">
           <div class="displayFlex w-30"> 
-            <label class="lineCenter">${publi.doc.likes}</label>
-            <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}></div>
+            <button type="button" id="button-like" class=" click button-icon">${publi.doc.likes}</button>
+            <button type="button" id="button-dislike" class="hide click button-icon">${publi.doc.likes}</button>
           </div>
           <div id="edit-post" class="hide button-pencil click button-icon">Editar</div>
           <div id="reply" class=" button-paperPlane click button-icon">Comentarios</div>
@@ -99,10 +99,18 @@ const listPosts = (publi) => {
   }
 
 
-  const like = div.querySelector('.button-like');
-  let numberLike = Number(like.dataset.value);
+  const like = div.querySelector('#button-like');
+  const dislike = div.querySelector('#button-dislike');
 
-  like.addEventListener('click', () => addingLikes(publi, numberLike + 1));
+  like.addEventListener('click', () => {
+    const newLike = publi.doc.likes + 1;
+    like.classList.add('hide')
+    toggleLikes(publi, newLike)
+  });
+  dislike.addEventListener('click', () => {
+    const newLike = publi.doc.likes - 1
+    toggleLikes(publi, newLike)
+  })
 
   const btnDelete = div.querySelector('#delete');
   btnDelete.addEventListener('click', () => deletePosts(publi));
@@ -235,15 +243,15 @@ export const Content = (posts) => {
       nameNeedChange.classList.toggle('hide');
     })
   });
+  add.addEventListener('click', () => {
+    const file = imageFile.files.length
+    addNewPost(textPost.value, privacy.value, file)
+  });
 
   imageFile.addEventListener('change', (event) => {
     const file = event.target.files;
     getImage(file)
   })
-  add.addEventListener('click', () => {
-    const file = imageFile.files.length
-    addNewPost(textPost.value, privacy.value, file)
-  });
   // const postId = posts.find(post =>{
   //   return post.doc.id == currentUser.uid
   // })

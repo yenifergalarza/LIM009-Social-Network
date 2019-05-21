@@ -25,15 +25,16 @@ export const getImage = (file) => {
 }
 
 export const addNewPost = (input, privacy, file) => {
-  const user = currentUser()
   let photoImg = ''
   if (file !== 0) {
     photoImg = newimg
-  }
-  addPost(input, user.displayName, user.uid, 0, privacy, photoImg)
-    .then(ref => {
-      console.log('Added document with ID: ', ref.id);
-    });
+  };
+  getUser(user=> {
+      addPost(input, user.name, user.uid, 0, privacy, photoImg)
+      .then(ref => {
+        console.log('Added document with ID: ', ref.id);
+      });
+  })
 }
 
 export const deletePosts = (publi) => {
@@ -54,7 +55,7 @@ export const editPrivacy = (publi, privacy) => {
   }
 }
 
-export const addingLikes = (publi, like) => {
+export const toggleLikes = (publi, like) => {
   likePlus(publi.id, like)
 }
 
@@ -67,11 +68,12 @@ export const addingPhotos = (photo) => {
 }
 
 export const addNewComment = (input, id) => {
-  const user = currentUser();
-  addComment(input.value, user.displayName, user.uid, id)
+getUser(user=> {
+  addComment(input.value, user.name, user.uid, id)
     .then(ref => {
       console.log('Added document with ID: ', ref.id);
     });
+})
 }
 
 export const deleteComments = (comment) => {

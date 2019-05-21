@@ -7,6 +7,7 @@ export const Login = () => {
     <div class="container1 container-bg">
       <img  class="someBg" src="assets/18984.jpg" alt="Some bg">
     </div>
+    
     <div id='login' class="container1 px-5">
   
       <h2 class="title-pass">WEBOOKS</h2>
@@ -32,13 +33,13 @@ export const Login = () => {
   div.innerHTML = back1;
 
   const buttonLogInEmail = div.querySelector('#button-login-email');
-  buttonLogInEmail.addEventListener('click', login);
+  buttonLogInEmail.addEventListener('click', () => login());
 
   const gmailLogin = div.querySelector('#google-login');
-  gmailLogin.addEventListener('click', googleLogin);
+  gmailLogin.addEventListener('click', () => googleLogin);
 
   const fbLogin = div.querySelector('#fb-login');
-  fbLogin.addEventListener('click', facebookLogin);
+  fbLogin.addEventListener('click', () => facebookLogin);
 
   return div
 };
