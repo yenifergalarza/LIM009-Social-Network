@@ -374,7 +374,6 @@ a:visited {
 
 .text-user {
     text-align: left;
-
     width: 90%;
     padding: 6%;
 }
@@ -382,19 +381,15 @@ a:visited {
 .edit-post {
     height: 153px;
     padding: 5%;
-
 }
 
 .write-post {
-
-   
-    width: 100%;
+ width: 100%;
     height: 60%;
     resize: none;
     border-radius: 3px;
     border: solid 1px #c6c6c6;
     background: #f2f2f2;
-
 }
 
 .click {
