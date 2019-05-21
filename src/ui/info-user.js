@@ -167,7 +167,7 @@ export const Content = (posts) => {
       </div>  
       
       <ul class="navLiUl offUl" id="show-this">
-        <li class="relative">
+        <li class="relative hideLgOut">
           <a href="" class="blackBack hoverA"> 
             <div class="displayFlex">
               <button id="btn-out" class="click button-icon button-leave"></button>
@@ -176,9 +176,9 @@ export const Content = (posts) => {
           </a>
         </li>
         <li class="relative">
-          <a class="blackBack white  hoverA" href="">
+          <a href="https://yenifergalarza.github.io/LIM009-Social-Network/"class="blackBack white  hoverA" href="">
             <div class="displayFlex">
-              <button id="btn-out" class="click button-icon button-bulb"></button>
+              <button  class="click button-icon button-bulb"></button>
               <span class="white"> InfoSobreProyecto</span>
             </div>
           </a>
