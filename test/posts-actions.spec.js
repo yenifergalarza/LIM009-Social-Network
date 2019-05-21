@@ -82,7 +82,7 @@ describe('agregar comentario', () => {
     })
   })
   
-  describe('eliminar posts', () => {
+  describe('eliminar comentario', () => {
     it('debe eliminar post con id 234567', (done) => {
       return deleteComment('234567').then(() => {
         const callback = (notes) => {
