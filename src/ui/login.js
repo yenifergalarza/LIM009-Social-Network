@@ -36,10 +36,10 @@ export const Login = () => {
   buttonLogInEmail.addEventListener('click', () => login());
 
   const gmailLogin = div.querySelector('#google-login');
-  gmailLogin.addEventListener('click', () => googleLogin);
+  gmailLogin.addEventListener('click', () => googleLogin());
 
   const fbLogin = div.querySelector('#fb-login');
-  fbLogin.addEventListener('click', () => facebookLogin);
+  fbLogin.addEventListener('click', () => facebookLogin());
 
   return div
 };

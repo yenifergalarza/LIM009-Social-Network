@@ -15,6 +15,9 @@
     list-style: none;
 }
 
+.width-70{
+    width: 70%;
+}
 .firstLi {
     float: left;
 }
@@ -59,6 +62,10 @@
     background-color: #f7f7f7;
 }
 
+.nav-title{
+    font-family: "Megrim", cursive;
+    font-size: 45px;
+}
 .title-pass {
     font-family: "Megrim", cursive;
     font-size: 45px;
@@ -88,6 +95,10 @@ input:focus {
 .px-5 {
     padding-bottom: 5%;
     padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.pxy-5{
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -193,7 +204,10 @@ a:visited {
     }
 
     .px-5 {
-        padding-top: 0;
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+    .pxy-5{
         padding-left: 15%;
         padding-right: 15%;
     }
@@ -242,6 +256,10 @@ a:visited {
 
     .px-5 {
         padding-top: 9%;
+        padding-left: 8%;
+        padding-right: 6%;
+    }
+    .pxy-5{
         padding-left: 8%;
         padding-right: 6%;
     }
@@ -374,7 +392,6 @@ a:visited {
     height: 60%;
     resize: none;
     border-radius: 3px;
-    text-align: center;
     border: solid 1px #c6c6c6;
     background: #f2f2f2;
 
@@ -390,6 +407,15 @@ a:visited {
     background-size: 25px 25px;
     height: 40px;
     width: 40px;
+    background-repeat: no-repeat;
+    background-color: #ffd255;
+    background-position: center;
+    border-radius: 72%;
+}
+.button-icon-comment {
+    background-size: 10px 10px;
+    height: 15px;
+    width: 15px;
     background-repeat: no-repeat;
     background-color: #ffd255;
     background-position: center;
@@ -416,7 +442,12 @@ a:visited {
     background-color: #ffd255;
     border-radius: 16px;
     position: relative;
-
+}
+.button-share-comment {
+    padding: 1%;
+    background-color: #ffd255;
+    border-radius: 16px;
+    position: relative;
 }
 
 .container-click {
@@ -601,7 +632,7 @@ a:visited {
 
     .edit-post {
 
-        height: 20%;
+        height: auto;
     }
 
     .reaction {

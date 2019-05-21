@@ -7,10 +7,13 @@ import { getRealTimeComment } from '../lib/controller-firebase/posts-actions.js'
 const listComments = (comment) =>{
   const div = document.createElement('div')
   const divComment = `
-    <div class="owner-post"><h3 class="font-size-post  white"> Respondido por : ${comment.doc.user}</h3>   <button class="cross click button-icon" id="delete-comment-post"></button></div>
-    <div class="replyWhite post-message font-size-post replyWhite px-6"  id="comment-msg">${comment.doc.post}</div>
-    <input type="text" id="update-comment" class="hide mgx">
-    <button class="mgx button-pencil click button-icon" id="edit-comment-post"></button>
+    <div class="replyWhite pxy-5 px-15">
+        <h3 class="font-size-post">${comment.doc.user} : </h3>   
+        <span class="font-size-post" id="comment-msg">${comment.doc.post}</span>
+        <input type="text" id="update-comment" class="hide mgx">
+        <button class="cross click button-icon-comment" id="delete-comment-post"></button>
+        <button class="mgx button-pencil click button-icon-comment" id="edit-comment-post"></button>
+    </div>
   
   `
   div.innerHTML = divComment
@@ -53,15 +56,19 @@ const listPosts = (publi) => {
       <div class="color-post">
         <div class="container-click reaction">
           <div class="displayFlex w-30"> 
-            <button type="button" id="button-like" class=" click button-icon">${publi.doc.likes}</button>
-            <button type="button" id="button-dislike" class="hide click button-icon">${publi.doc.likes}</button>
+            <button type="button" id="button-like" class=" click button-icon">Like</button>
+            <p>${publi.doc.likes}</p>
+            <button type="button" id="button-dislike" class=" click button-icon">Dislike</button>
+            
           </div>
           <div id="edit-post" class="hide button-pencil click button-icon"></div>
           <div id="reply" class=" button-paperPlane click button-icon"></div>
         </div>
         <div id="comments" class="hide">
-          <input id="input-comment" type="text" class="mgx" placeholder="Escribe un comentario">
-          <button id="btn-comment" class="button-share click white" type="button"> publicar</button>
+          <div class="container"> 
+            <input id="input-comment" type="text" class="width-70 mgx" placeholder="Escribe un comentario">
+            <button id="btn-comment" class="button-share-comment click white" type="button"> Comentar</button>
+          </div>
           <div id="comment-post"></div>
         </div>
       </div>
@@ -103,13 +110,13 @@ const listPosts = (publi) => {
   const dislike = div.querySelector('#button-dislike');
 
   like.addEventListener('click', () => {
-    const newLike = publi.doc.likes + 1;
-    like.classList.add('hide')
-    toggleLikes(publi, newLike)
+    const plusLike = publi.doc.likes + 1;
+      toggleLikes(publi, plusLike)
   });
+
   dislike.addEventListener('click', () => {
-    const newLike = publi.doc.likes - 1
-    toggleLikes(publi, newLike)
+    const lessLike = publi.doc.likes - 1;
+    toggleLikes(publi, lessLike)
   })
 
   const btnDelete = div.querySelector('#delete');
@@ -153,7 +160,7 @@ export const Content = (posts) => {
   <ul class="nav offUl">
     <li class="nav-content firstLi">
       <div id="show-menu" class="menu"></div>
-      <h1 class="white">Welcome </h1>
+      <h1 class="white nav-title">WeBooks </h1>
       <div class="displayFlex hideSmall dontHide">
         <button id="btn-out" class="click button-icon button-leave"></button>
         <label for="btn-out" class="white">Cerrar sesión</label>
