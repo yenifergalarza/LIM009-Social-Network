@@ -56,13 +56,13 @@ const listPosts = (publi) => {
       <div class="color-post">
         <div class="container-click reaction">
           <div class="displayFlex w-30"> 
-            <button type="button" id="button-like" class=" click button-icon">Like</button>
+            <button type="button" id="button-like" class=" click button-icon button-like "></button>
             <p>${publi.doc.likes}</p>
-            <button type="button" id="button-dislike" class=" click button-icon">Dislike</button>
+            <button type="button" id="button-dislike" class=" click button-icon button-dislike "></button>
             
           </div>
           <div id="edit-post" class="hide button-pencil click button-icon"></div>
-          <div id="reply" class=" button-paperPlane click button-icon"></div>
+          <div id="reply" class=" button-paperPlane click button-icon "></div>
         </div>
         <div id="comments" class="hide">
           <div class="container"> 
@@ -235,7 +235,7 @@ export const Content = (posts) => {
       <div class="text-user">
       <p id="nameNeedChange" class="nameTitle"> ${myData.name}</p>
       <input id="inputName" class="hide"/>
-      <p>WeBooker jr </p>
+      <p>WeBooker</p>
       <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>   
   `;
 

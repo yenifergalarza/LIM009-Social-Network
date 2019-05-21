@@ -490,7 +490,11 @@ a:visited {
 
 .button-like {
     background-image: url("/src/assets/like.png");
-    text-indent: -90000000px;
+ /*    text-indent: -90000000px; */
+}
+.button-dislike {
+    background-image: url("/src/assets/broken-heart.png");
+ /*    text-indent: -90000000px; */
 }
 .button-paperPlane {
     background-image: url("/src/assets/paper-plane.png");
@@ -632,9 +636,8 @@ a:visited {
 
     .reaction {
         padding: 2%;
-        width: 50%;
+        width: 66%;
     }
-
     .text-user {
 
         padding: 8%;
