@@ -7,11 +7,11 @@ import { getRealTimeComment } from '../lib/controller-firebase/posts-actions.js'
 const listComments = (comment) =>{
   const div = document.createElement('div')
   const divComment = `
-    <div>${comment.doc.user}</div>
-    <div id="comment-msg">${comment.doc.post}</div>
-    <input type="text" id="update-comment" class="hide">
-    <button id="edit-comment-post">Editar</button>
-    <button id="delete-comment-post">Eliminar</button>
+    <div class="owner-post"><h3 class="font-size-post  white"> Respondido por : ${comment.doc.user}</h3>   <button class="cross click button-icon" id="delete-comment-post"></button></div>
+    <div class="replyWhite post-message font-size-post replyWhite px-6"  id="comment-msg">${comment.doc.post}</div>
+    <input type="text" id="update-comment" class="hide mgx">
+    <button class="mgx button-pencil click button-icon" id="edit-comment-post"></button>
+  
   `
   div.innerHTML = divComment
   const deleteCommentPost = div.querySelector('#delete-comment-post')
@@ -38,7 +38,7 @@ const listPosts = (publi) => {
     <div class="comment-post post">
       
       <div class="owner-post">
-        <h3 class="font-size-post white ">Publicado por <span>${publi.doc.user}</span> </h3>
+        <h3 class="font-size-post white ">Publicado por ${publi.doc.user} </h3>
           <select name="privacy" id="edit-privacy" class="hide ml-39"> 
             <option value=${publi.doc.privacy}></option>
             <option></option>
@@ -47,7 +47,7 @@ const listPosts = (publi) => {
       </div>
       <div>
         <div class="font-size-post px-6" id="post-message"> ${publi.doc.post}</div>
-        <input id="update-data" class="hide px-6" value= ${publi.doc.post} />
+        <input id="update-data" class="hide mgx" value= ${publi.doc.post} />
         <div id="photoUploaded"></div>     
       </div>
       <div class="color-post">
@@ -56,12 +56,12 @@ const listPosts = (publi) => {
             <label class="lineCenter">${publi.doc.likes}</label>
             <div type="button" class="button-like click button-icon" data-value=${publi.doc.likes}></div>
           </div>
-          <div id="edit-post" class="hide button-pencil click button-icon">Editar</div>
-          <div id="reply" class=" button-paperPlane click button-icon">Comentarios</div>
+          <div id="edit-post" class="hide button-pencil click button-icon"></div>
+          <div id="reply" class=" button-paperPlane click button-icon"></div>
         </div>
         <div id="comments" class="hide">
-          <input id="input-comment" type="text" placeholder="Escribe un comentario">
-          <button id="btn-comment" type="button">Comentar </button>
+          <input id="input-comment" type="text" class="mgx" placeholder="Escribe un comentario">
+          <button id="btn-comment" class="button-share click white" type="button"> publicar</button>
           <div id="comment-post"></div>
         </div>
       </div>

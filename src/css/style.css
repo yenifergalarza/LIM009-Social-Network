@@ -652,3 +652,13 @@ a:visited {
     margin: 5%;
     height: auto;
 }
+
+.replyWhite{
+    background-color: #fff;
+    border-bottom: solid 1px orange;
+}
+.mgx{
+
+    margin: 15px;
+
+}
