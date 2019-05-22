@@ -1,5 +1,5 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { getUserData, getRealTimeData, getRealTimePost, addPost, deletePost, editPost} from "../src/lib/controller-firebase/posts.js";
+import { getUserData, getRealTimeData, getRealTimePost, addPost, deletePost, editPost } from "../src/lib/controller-firebase/posts.js";
 
 export const fixtureData = {
   __collection__: {
@@ -22,7 +22,7 @@ export const fixtureData = {
           privacy: "private",
           uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
           user: "Yeni",
-          date: {seconds: 1558322863, nanoseconds: 816000000}
+          date: { seconds: 1558322863, nanoseconds: 816000000 }
         }
       },
       234567: {
@@ -32,7 +32,7 @@ export const fixtureData = {
         privacy: "public",
         uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
         user: "perlita",
-        date: {seconds: 1558310759, nanoseconds: 213000000}
+        date: { seconds: 1558310759, nanoseconds: 213000000 }
       },
     }
   }
@@ -40,7 +40,7 @@ export const fixtureData = {
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
-  describe('getUserData', () => {
+describe('getUserData', () => {
   it('deberia capturar la data del usuario activi', (done) => {
     const user = {
       'displayName': 'Yeni',
@@ -100,3 +100,4 @@ describe('editar post', () => {
     })
   })
 })
+

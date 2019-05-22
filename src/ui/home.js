@@ -4,6 +4,35 @@ import { updateUserDataName } from '../lib/view-controllers/user-profile.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 import { listPosts } from './posts.js'
 
+const userSection = (myData) => {
+  const div = document.createElement('div');
+  div.innerHTML = `
+      <div class="user-image-landscape">
+      </div>
+  
+      <div class="user-photo-name">
+        <img class="user-photo" src="${myData.photo}" alt="">
+      <div class="text-user">
+      <p id="nameNeedChange" class="nameTitle"> ${myData.name}</p>
+      <input id="inputName" class="hide"/>
+      <p>WeBooker</p>
+      <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>   
+  `;
+
+    const buttonActionChange = div.querySelector('#changeName');
+    const nameNeedChange = div.querySelector('#nameNeedChange')
+    const inputNewName = div.querySelector("#inputName");
+    
+    buttonActionChange.addEventListener('click', () => {
+      inputNewName.classList.toggle('hide');
+      if (inputNewName.value !== "") {
+        updateUserDataName(myData, inputNewName.value);
+      };
+      nameNeedChange.classList.toggle('hide');
+    })
+    return div
+}
+
 export const Content = (posts) => {
   const div = document.createElement('div');
   div.innerHTML = `
@@ -77,30 +106,9 @@ export const Content = (posts) => {
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
-    printinfo.innerHTML = `
-      <div class="user-image-landscape">
-      </div>
-  
-      <div class="user-photo-name">
-        <img class="user-photo" src="${myData.photo}" alt="">
-      <div class="text-user">
-      <p id="nameNeedChange" class="nameTitle"> ${myData.name}</p>
-      <input id="inputName" class="hide"/>
-      <p>WeBooker</p>
-      <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>   
-  `;
-
-    const buttonActionChange = printinfo.querySelector('#changeName');
-    buttonActionChange.addEventListener('click', () => {
-      const nameNeedChange = printinfo.querySelector('#nameNeedChange')
-      const inputNewName = printinfo.querySelector("#inputName");
-      inputNewName.classList.toggle('hide');
-      if (inputNewName.value !== "") {
-        updateUserDataName(myData, inputNewName.value);
-      };
-      nameNeedChange.classList.toggle('hide');
-    })
+    printinfo.appendChild(userSection(myData)) 
   });
+
   add.addEventListener('click', () => {
     const file = imageFile.files.length
     addNewPost(textPost.value, privacy.value, file)
@@ -110,10 +118,7 @@ export const Content = (posts) => {
     const file = event.target.files;
     getImage(file)
   })
-  // const postId = posts.find(post =>{
-  //   return post.doc.id == currentUser.uid
-  // })
-  // console.log(postId)
+
   posts.forEach(publi => {
     console.log(publi)
     if (publi.doc.privacy == 'public') {
