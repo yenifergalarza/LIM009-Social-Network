@@ -1,7 +1,7 @@
 import MockFirebase from 'mock-cloud-firestore';
 import { getUserData, getRealTimeData, getRealTimePost, addPost, deletePost, editPost} from "../src/lib/controller-firebase/posts.js";
 
-const fixtureData = {
+export const fixtureData = {
   __collection__: {
     users: {
       __doc__: {

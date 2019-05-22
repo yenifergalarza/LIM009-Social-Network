@@ -32,12 +32,12 @@ const fixtureData = {
                           date:{seconds: 1558310759, nanoseconds: 213000000},
                         post:"holaaaa",
                       uid: "qwerty",
-                      user:"Pepito suarez"
-                      }
-                    }
+                      user:"Pepito suarez",
+                      },
+                    },
               
                   }
-              }
+              },
             },
             234567: {
                 likes: 0,
@@ -49,7 +49,7 @@ const fixtureData = {
             },
         }
     }
-}
+};
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
