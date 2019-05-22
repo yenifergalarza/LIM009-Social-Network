@@ -65,7 +65,6 @@ export const listPosts = (publi) => {
     })
   })
 
-
   const postImg = div.querySelector('#photoUploaded');
   if (publi.doc.photo !== '') {
     const image = document.createElement('img')
@@ -73,7 +72,6 @@ export const listPosts = (publi) => {
     image.classList.add('styleAddImage');
     postImg.appendChild(image)
   }
-
 
   const like = div.querySelector('#button-like');
   const dislike = div.querySelector('#button-dislike');

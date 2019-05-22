@@ -55,9 +55,9 @@ export const getImagePost = (file, cb) => {
   //create ref
   const storageRef = firebase.storage().ref()
   const imageRef = storageRef.child(`images/${file.name}`)
-
   //update file to fb storage
   const task = imageRef.put(file)
+  console.log(task)
   return task.on('state_changed', (snapshot) => {
   }, (error) => {
   }, () => {

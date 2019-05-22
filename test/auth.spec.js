@@ -1,11 +1,27 @@
 const firebasemock = require('firebase-mock');
-const mockauth = new firebasemock.MockFirebase();
-global.firebase = new firebasemock.MockFirebaseSdk(
-  // use null if your code does not use RTDB
-  path => path ? mockdatabase.child(path) : null,
-  () => mockauth
-)
+
+const mockauth = new firebasemock.MockAuthentication();
+const mockdatabase = new firebasemock.MockFirebase();
+const mockfirestore = new firebasemock.MockFirestore();
+const mockstorage = new firebasemock.MockStorage();
+
+export const mocksdk = new firebasemock.MockFirebaseSdk(
+  (path) => {
+    return path ? mockdatabase.child(path) : null
+  },
+  () => {
+    return mockauth;
+  },
+  () => {
+    return mockfirestore;
+  },
+  () => {
+    return mockstorage;
+  }
+);
+
 mockauth.autoFlush();
+global.firebase = mocksdk;
 
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser, currentUser } from "../src/lib/controller-firebase/auth.js";
 
@@ -22,11 +38,10 @@ describe('funcLogin', () => {
 describe('funcRegister', () => {
   it('deberia registrar el email ingresado', (done) => {
     funcRegister('emailabc@gmail.com', 'abc666')
-    .then((user) => {
-      // console.log(user)
-       expect(user.email).toBe('emailabc@gmail.com')
-      done()
-    });
+      .then((user) => {
+        expect(user.email).toBe('emailabc@gmail.com')
+        done()
+      });
   });
 });
 
@@ -62,22 +77,22 @@ describe('signOut', () => {
 
 describe('activeUser', () => {
   it('deberia identificar si el usuario se encuentra activo', (done) => {
-      const callback = user => {
-          expect(user.email).toEqual('login@gmail.com')
-          done()
-        }
-        activeUser(callback)
-        funcLogin('login@gmail.com', '123456')
-    })
+    const callback = user => {
+      expect(user.email).toEqual('login@gmail.com')
+      done()
+    }
+    activeUser(callback)
+    funcLogin('login@gmail.com', '123456')
+  })
 })
 
 describe('currentUser', () => {
-    it('deberia tener usuario activo', (done) => {
-         funcLogin('login@gmail.com', '123456')
-        .then(()=> {
-            const user = currentUser();
-            expect(user.email).toEqual('login@gmail.com');
-            done()
-        })
-    } )
+  it('deberia tener usuario activo', (done) => {
+    funcLogin('login@gmail.com', '123456')
+      .then(() => {
+        const user = currentUser();
+        expect(user.email).toEqual('login@gmail.com');
+        done()
+      })
+  })
 })
