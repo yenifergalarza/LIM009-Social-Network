@@ -7,9 +7,6 @@ global.firebase = new firebasemock.MockFirebaseSdk(
 )
 mockauth.autoFlush();
 
-// import MockFirebase from '../_mocks_/firebase-mock.js';
-// global.firebase = MockFirebase();
-
 import { funcLogin, funcRegister, funcFacebook, funcGoogle, signOut, activeUser, currentUser } from "../src/lib/controller-firebase/auth.js";
 
 describe('funcLogin', () => {
@@ -66,7 +63,6 @@ describe('signOut', () => {
 describe('activeUser', () => {
   it('deberia identificar si el usuario se encuentra activo', (done) => {
       const callback = user => {
-        console.log(user)
           expect(user.email).toEqual('login@gmail.com')
           done()
         }
