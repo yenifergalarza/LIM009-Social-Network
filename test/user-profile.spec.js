@@ -26,7 +26,7 @@ const fixtureData = {
         }
       },
       234567: {
-        displayName: 'Yeni',
+        displayName: 'Yenife',
         email: 'yeni333@gmail.com',
         photoURL: 'yeni.jpg',
         uid: 'abcXXX123'

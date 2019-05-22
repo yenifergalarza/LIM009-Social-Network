@@ -23,8 +23,21 @@ const fixtureData = {
                     privacy: "private",
                     state: true,
                     uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-                    user: "Yeni"
-                }
+                    user: "Yeni",
+                    __collection__: {
+          
+                    comments:{
+                      __doc__: {
+                        1234567: {
+                          date:{seconds: 1558310759, nanoseconds: 213000000},
+                        post:"holaaaa",
+                      uid: "qwerty",
+                      user:"Pepito suarez"
+                      }
+                    }
+              
+                  }
+              }
             },
             234567: {
                 likes: 0,
@@ -69,7 +82,8 @@ describe('editar post', () => {
 
 describe('agregar comentario', () => {
     it('deberia agregar un comentario ', (done) => {
-      return addComment('Dame croquetas', 'Sillao el chihuahua', 'abc123',  234567).then(() => {
+      return addComment(
+        'Dame croquetas','Pepi',axxYZ12,123456).then(() => {
         const callback = (notes) => {
           const result = notes.filter((note) => {
             return note.doc.post === 'Dame croquetas';
@@ -88,9 +102,9 @@ describe('agregar comentario', () => {
         const callback = (notes) => {
           const result = notes.filter((note) => {
             return note.id === '234567';
-          })
+          }) 
           expect(result[0]).toBe(undefined)
-          done()
+         done()
         }
         getRealTimePost(callback)
       })
