@@ -47,9 +47,9 @@ const fixtureData = {
                 uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
                 user: "perlita"
             },
-        }
-    }
-};
+        },
+    },
+}
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
