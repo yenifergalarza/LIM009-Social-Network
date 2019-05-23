@@ -15,6 +15,7 @@ export const likePlus = (id, like) => {
 
 export const addComment = (input, userName, uid, postFatherId) => {
   const firestore = firebase.firestore();
+  console.log(   firestore.collection('posts')  );
   return firestore.collection('posts').doc(postFatherId).collection('comments').add({
     post: input,
     postId: postFatherId,
