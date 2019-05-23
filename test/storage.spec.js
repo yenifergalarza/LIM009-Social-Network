@@ -1,4 +1,4 @@
-
+/* 
 const firebasemock = require('firebase-mock');
 const mockstorage = new firebasemock.MockStorage()
 
@@ -23,4 +23,4 @@ describe('añadir img', () => {
       done()
     })
   })
-})
+}) */
