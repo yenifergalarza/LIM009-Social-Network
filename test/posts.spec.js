@@ -104,6 +104,22 @@ describe('getUserData', () => {
       }
       getRealTimeData(user.uid, callback)
     })
+  });
+  it('deberia capturar la data del usuario activi', (done) => {
+    const user = {
+      'displayName': null,
+      'email': 'yeni333@gmail.com',
+      'photoURL': null,
+      'uid': 'abcXXX123'
+    }
+    return getUserData(user,'jun').then(() => {
+      const callback = (doc) => {
+        const data = doc.data()
+        expect(data.email).toEqual('yeni333@gmail.com')
+        done()
+      }
+      getRealTimeData(user.uid, callback)
+    })
   })
 });
 
