@@ -1,7 +1,7 @@
 import MockFirebase from 'mock-cloud-firestore';
 import { getUserData, getRealTimeData, getRealTimePost, addPost, deletePost, editPost } from "../src/lib/controller-firebase/posts.js";
 
-export const fixtureData = {
+const fixtureData = {
   __collection__: {
     users: {
       __doc__: {
@@ -16,14 +16,6 @@ export const fixtureData = {
     posts: {
       __doc__: {
         123456: {
-          likes: 0,
-          post: "hola",
-          photo: "yeni.jpg",
-          privacy: "private",
-          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-          user: "Yeni",
-          date: { seconds: 1558322863, nanoseconds: 816000000 },
-
           __collection__: {
             comments: {
               __doc__: {
@@ -36,17 +28,17 @@ export const fixtureData = {
                 }
               }
             }
-          }
+          },
+          likes: 0,
+          post: "hola",
+          photo: "yeni.jpg",
+          privacy: "private",
+          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
+          user: "Yeni",
+          date: { seconds: 1558322863, nanoseconds: 816000000 }
+
         },
         234567: {
-          likes: 0,
-          post: "adios",
-          photo: "perlita.jpg",
-          privacy: "public",
-          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-          user: "perlita",
-          date: { seconds: 1558310759, nanoseconds: 213000000 },
-
           __collection__: {
             comments: {
               __doc__: {
@@ -59,7 +51,15 @@ export const fixtureData = {
                 }
               }
             }
-          }
+          },
+          likes: 0,
+          post: "adios",
+          photo: "perlita.jpg",
+          privacy: "public",
+          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
+          user: "perlita",
+          date: { seconds: 1558310759, nanoseconds: 213000000 },
+
         }
       }
     }

@@ -15,7 +15,6 @@ export const likePlus = (id, like) => {
 
 export const addComment = (input, userName, uid, postFatherId) => {
   const firestore = firebase.firestore();
-  console.log(   firestore.collection('posts')  );
   return firestore.collection('posts').doc(postFatherId).collection('comments').add({
     post: input,
     postId: postFatherId,
@@ -37,14 +36,14 @@ export const getRealTimeComment = (postFatherId, cb)=> {
   })
 }
 
-export const deleteComment = (comment) => {
+export const deleteComment = (postId, id) => {
   const firestore = firebase.firestore();
-  return firestore.collection('posts').doc(comment.doc.postId).collection('comments').doc(comment.id).delete()
+  return firestore.collection('posts').doc(postId).collection('comments').doc(id).delete()
 }
 
-export const editComment = (comment, input) => {
+export const editComment = (postId, id, input) => {
   const firestore = firebase.firestore();
-  return firestore.collection('posts').doc(comment.doc.postId).collection('comments').doc(comment.id).update({
+  return firestore.collection('posts').doc(postId).collection('comments').doc(id).update({
     post: input
   })
 }

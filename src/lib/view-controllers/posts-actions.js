@@ -1,4 +1,5 @@
 import { likePlus, privacyPost, addComment, deleteComment, editComment } from '../controller-firebase/posts-actions.js'
+import { getUser } from '../view-controllers/posts.js'
 import { currentUser } from '../controller-firebase/auth.js';
 
 export const editPrivacy = (publi, privacy) => {
@@ -23,13 +24,13 @@ export const addNewComment = (input, id) => {
 
 export const deleteComments = (comment) => {
   if (currentUser().uid === comment.doc.uid) {
-    deleteComment(comment)
+    deleteComment(comment.doc.postId, comment.id)
   }
 }
 
 export const editComments = (comment, input) => {
   console.log(comment)
   if (currentUser().uid === comment.doc.uid) {
-    editComment(comment, input)
+    editComment(comment.doc.postId, comment.id,  input)
   }
 }

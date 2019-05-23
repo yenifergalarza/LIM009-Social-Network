@@ -15,6 +15,19 @@ const fixtureData = {
     posts: {
       __doc__: {
         123456: {
+          __collection__: {
+            comments: {
+              __doc__: {
+                1234567: {
+                  date: { seconds: 1558350759, nanoseconds: 213000000 },
+                  postId: 123456,
+                  post: "holaaaa",
+                  uid: "axxYZ12",
+                  user: "Pepi",
+                }
+              }
+            }
+          },
           likes: 0,
           post: "hola",
           photo: "yeni.jpg",
@@ -22,23 +35,38 @@ const fixtureData = {
           uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
           user: "Yeni",
           date: { seconds: 1558322863, nanoseconds: 816000000 }
+
+        },
+        234567: {
+          __collection__: {
+            comments: {
+              __doc__: {
+                2345678: {
+                  date: { seconds: 1558300759, nanoseconds: 213100000 },
+                  postId: 234567,
+                  post: "adios",
+                  uid: "axxYZ12",
+                  user: "Pepi",
+                }
+              }
+            }
+          },
+          likes: 0,
+          post: "adios",
+          photo: "perlita.jpg",
+          privacy: "public",
+          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
+          user: "perlita",
+          date: { seconds: 1558310759, nanoseconds: 213000000 },
+
         }
-      },
-      234567: {
-        likes: 0,
-        post: "adios",
-        photo: "perlita.jpg",
-        privacy: "public",
-        uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-        user: "perlita",
-        date: { seconds: 1558310759, nanoseconds: 213000000 }
-      },
+      }
     }
   }
-}
+};
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
-import { privacyPost, likePlus, addComment, deleteComment } from "../src/lib/controller-firebase/posts-actions";
+import { privacyPost, likePlus, addComment, deleteComment, getRealTimeComment, editComment } from "../src/lib/controller-firebase/posts-actions";
 import { getRealTimePost } from "../src/lib/controller-firebase/posts.js";
 
 
@@ -69,33 +97,47 @@ describe('editar privacidad de post', () => {
 
 
 describe('agregar comentario', () => {
-  it.only('deberia agregar un comentario ', (done) => {
-    return addComment('Dame croquetas', 'Pepi', 'axxYZ12', 234567).then((a) => {
-      console.log(a)
-      // const callback = (notes) => {
-      //   const result = notes.filter((note) => {
-      //     return note.doc.post === 'Dame croquetas';
-      //   })
-      //   expect(result[0].doc.post).toBe('Dame croquetas');
-      //   done()
-      // }
-      // getRealTimeComment(123456,callback)
+  it('deberia agregar un comentario ', (done) => {
+    return addComment('Dame croquetas', 'Pepi', 'axxYZ12', '234567').then(() => {
+      const callback = (notes) => {
+        const result = notes.filter((note) => {
+          return note.doc.post === 'Dame croquetas';
+        })
+        expect(result[0].doc.post).toEqual('Dame croquetas');
+        done()
+      }
+      getRealTimeComment('234567', callback)
     })
   })
 
-  describe('eliminar comentario', () => {
-    const newLocal = 1234567;
-    it('debe eliminar post con id 1234567', (done) => {
-      return deleteComment(newLocal).then(() => {
-        const callback = (notes) => {
-          const result = notes.filter((note) => {
-            return note.id === 1234567;
-          })
-          expect(result[0]).toBe(undefined)
-          done()
-        }
-        getRealTimeComment(123456, callback)
-      })
+});
+describe('eliminar comentario', () => {
+  const newLocal = 1234567;
+  it('debe eliminar comment con id ', (done) => {
+    return deleteComment(newLocal).then(() => {
+      const callback = (notes) => {
+        const result = notes.filter((note) => {
+          return note.id === 1234567;
+        })
+        expect(result[0]).toBe(undefined)
+        done()
+      }
+      getRealTimeComment(123456, callback)
     })
   })
 })
+
+describe('editar comentario', () => {
+  it('debe editar comment con id ', (done) => {
+    return editComment('1111').then(() => {
+      const callback = (notes) => {
+        const result = notes.filter((note) => {
+          return note.id === 1234567;
+        })
+        expect(result[0]).toBe(undefined)
+        done()
+      }
+      getRealTimeComment(123456, callback)
+    })
+  })
+});
