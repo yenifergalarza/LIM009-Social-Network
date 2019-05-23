@@ -1,7 +1,18 @@
-import { mocksdk } from './auth.spec.js'
-import { getImagePost } from "../src/lib/controller-firebase/posts.js";
+
+const firebasemock = require('firebase-mock');
+const mockstorage = new firebasemock.MockStorage()
+
+
+const mocksdk = new firebasemock.MockFirebaseSdk(
+  () => {
+    return mockstorage;
+  }
+);
+
 
 global.firebase = mocksdk;
+
+import { getImagePost } from "../src/lib/controller-firebase/posts.js";
 
 describe('añadir img', () => {
   it('deberia añadir la img al storage', (done) => {
@@ -9,8 +20,6 @@ describe('añadir img', () => {
 
     getImagePost(image, (url)=> {
       console.log(url)
-    }).then(what => {
-      console.log(what);
       done()
     })
   })

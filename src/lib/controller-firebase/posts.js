@@ -53,7 +53,8 @@ export const editPost = (id, input) => {
 
 export const getImagePost = (file, cb) => {
   //create ref
-  const storageRef = firebase.storage().ref()
+  const storageRef = firebase.storage().ref(`images/${file.name}`)
+  
   const imageRef = storageRef.child(`images/${file.name}`)
   //update file to fb storage
   const task = imageRef.put(file)

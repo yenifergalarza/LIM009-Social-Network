@@ -22,21 +22,49 @@ export const fixtureData = {
           privacy: "private",
           uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
           user: "Yeni",
-          date: { seconds: 1558322863, nanoseconds: 816000000 }
+          date: { seconds: 1558322863, nanoseconds: 816000000 },
+
+          __collection__: {
+            comments: {
+              __doc__: {
+                1234567: {
+                  date: { seconds: 1558350759, nanoseconds: 213000000 },
+                  postId: 123456,
+                  post: "holaaaa",
+                  uid: "axxYZ12",
+                  user: "Pepi",
+                }
+              }
+            }
+          }
+        },
+        234567: {
+          likes: 0,
+          post: "adios",
+          photo: "perlita.jpg",
+          privacy: "public",
+          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
+          user: "perlita",
+          date: { seconds: 1558310759, nanoseconds: 213000000 },
+
+          __collection__: {
+            comments: {
+              __doc__: {
+                2345678: {
+                  date: { seconds: 1558300759, nanoseconds: 213100000 },
+                  postId: 234567,
+                  post: "adios",
+                  uid: "axxYZ12",
+                  user: "Pepi",
+                }
+              }
+            }
+          }
         }
-      },
-      234567: {
-        likes: 0,
-        post: "adios",
-        photo: "perlita.jpg",
-        privacy: "public",
-        uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-        user: "perlita",
-        date: { seconds: 1558310759, nanoseconds: 213000000 }
-      },
+      }
     }
   }
-}
+};
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 

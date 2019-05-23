@@ -2,8 +2,7 @@ const firebasemock = require('firebase-mock');
 
 const mockauth = new firebasemock.MockAuthentication();
 const mockdatabase = new firebasemock.MockFirebase();
-const mockfirestore = new firebasemock.MockFirestore();
-const mockstorage = new firebasemock.MockStorage();
+
 
 export const mocksdk = new firebasemock.MockFirebaseSdk(
   (path) => {
@@ -11,9 +10,6 @@ export const mocksdk = new firebasemock.MockFirebaseSdk(
   },
   () => {
     return mockauth;
-  },
-  () => {
-    return mockfirestore;
   },
   () => {
     return mockstorage;
