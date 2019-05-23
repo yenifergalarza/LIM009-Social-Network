@@ -58,7 +58,6 @@ export const getImagePost = (file, cb) => {
   const imageRef = storageRef.child(`images/${file.name}`)
   //update file to fb storage
   const task = imageRef.put(file)
-  console.log(task)
   return task.on('state_changed', (snapshot) => {
   }, (error) => {
   }, () => {

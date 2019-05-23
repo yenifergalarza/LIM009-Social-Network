@@ -121,7 +121,10 @@ describe('editar post', () => {
   it('deberia retornar nuevo post: quiero dormir', (done) => {
     return editPost('123456', 'quiero dormir').then(() => {
       const callback = (notes) => {
-        expect(notes[0].doc.post).toEqual('quiero dormir')
+        const result = notes.filter((note) => {
+          return note.id === '123456';
+        })
+        expect(result[0]['doc'].post).toEqual('quiero dormir')
         done()
       }
       getRealTimePost(callback)
