@@ -1,5 +1,12 @@
 import MockFirebase from 'mock-cloud-firestore';
-import { getUserData, getRealTimeData, getRealTimePost, addPost, deletePost, editPost } from "../src/lib/controller-firebase/posts.js";
+import {
+  getUserData,
+  getRealTimeData,
+  getRealTimePost,
+  addPost,
+  deletePost,
+  editPost
+} from "../src/lib/controller-firebase/posts.js";
 
 const fixtureData = {
   __collection__: {
@@ -16,11 +23,24 @@ const fixtureData = {
     posts: {
       __doc__: {
         123456: {
+          likes: 0,
+          post: "hola",
+          photo: "yeni.jpg",
+          privacy: "private",
+          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
+          user: "Yeni",
+          date: {
+            seconds: 1558322863,
+            nanoseconds: 816000000
+          },
           __collection__: {
             comments: {
               __doc__: {
                 1234567: {
-                  date: { seconds: 1558350759, nanoseconds: 213000000 },
+                  date: {
+                    seconds: 1558350759,
+                    nanoseconds: 213000000
+                  },
                   postId: 123456,
                   post: "holaaaa",
                   uid: "axxYZ12",
@@ -28,22 +48,17 @@ const fixtureData = {
                 }
               }
             }
-          },
-          likes: 0,
-          post: "hola",
-          photo: "yeni.jpg",
-          privacy: "private",
-          uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
-          user: "Yeni",
-          date: { seconds: 1558322863, nanoseconds: 816000000 }
-
+          }
         },
         234567: {
           __collection__: {
             comments: {
               __doc__: {
                 2345678: {
-                  date: { seconds: 1558300759, nanoseconds: 213100000 },
+                  date: {
+                    seconds: 1558300759,
+                    nanoseconds: 213100000
+                  },
                   postId: 234567,
                   post: "adios",
                   uid: "axxYZ12",
@@ -58,7 +73,10 @@ const fixtureData = {
           privacy: "public",
           uid: "mZlFTubNrZPWBPQeMxUVoXX0exy1",
           user: "perlita",
-          date: { seconds: 1558310759, nanoseconds: 213000000 },
+          date: {
+            seconds: 1558310759,
+            nanoseconds: 213000000
+          },
 
         }
       }
@@ -66,7 +84,9 @@ const fixtureData = {
   }
 };
 
-global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
+global.firebase = new MockFirebase(fixtureData, {
+  isNaiveSnapshotListenerEnabled: true
+});
 
 describe('getUserData', () => {
   it('deberia capturar la data del usuario activi', (done) => {
@@ -85,7 +105,7 @@ describe('getUserData', () => {
       getRealTimeData(user.uid, callback)
     })
   })
-})
+});
 
 describe('agregar', () => {
   it('deberia agregar un post ', (done) => {
@@ -100,7 +120,23 @@ describe('agregar', () => {
       getRealTimePost(callback)
     })
   })
-})
+});
+
+describe('editar post', () => {
+  it('deberia retornar nuevo post: quiero dormir', (done) => {
+    return editPost('234567', 'quiero dormir')
+      .then(() => {
+        const callback = (notes) => { 
+          const result = notes.filter((note) => {
+          return note.id === '234567';
+        })
+          expect(result[0]['doc'].post).toEqual('quiero dormir')
+          done()
+        }
+        getRealTimePost(callback)
+      })
+  })
+});
 
 describe('eliminar posts', () => {
   it('debe eliminar post con id 234567', (done) => {
@@ -115,20 +151,4 @@ describe('eliminar posts', () => {
       getRealTimePost(callback)
     })
   })
-})
-
-describe('editar post', () => {
-  it('deberia retornar nuevo post: quiero dormir', (done) => {
-    return editPost('123456', 'quiero dormir').then(() => {
-      const callback = (notes) => {
-        const result = notes.filter((note) => {
-          return note.id === '123456';
-        })
-        expect(result[0]['doc'].post).toEqual('quiero dormir')
-        done()
-      }
-      getRealTimePost(callback)
-    })
-  })
-})
-
+});

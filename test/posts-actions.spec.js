@@ -113,12 +113,12 @@ describe('agregar comentario', () => {
 });
 describe('eliminar comentario', () => {
   it('debe eliminar comment con id ', (done) => {
-    return deleteComment('123456', '1234567').then(() => {
+    return deleteComment('123456','1234567').then(() => {
       const callback = (notes) => {
         const result = notes.filter((note) => {
           return note.id === '1234567';
         })
-        expect(result[0]).toBe(undefined)
+          expect(result[0]).toBe(undefined)
         done()
       }
       getRealTimeComment('123456', callback)
@@ -128,12 +128,12 @@ describe('eliminar comentario', () => {
 
 describe('editar comentario', () => {
   it('debe editar comment con id ', (done) => {
-    return editComment('234567', '2345678', 'juana estuvo aqui').then(() => {
+    return editComment('234567', '2345678', "juana estuvo aqui").then(() => {
       const callback = (notes) => {
         const result = notes.filter((note) => {
           return note.id === '2345678';
-        })
-        expect(result[0].doc.post).toBe('juana estuvo aqui')
+        }) 
+        expect(result[0]['doc'].post).toBe("juana estuvo aqui")
         done()
       }
       getRealTimeComment('234567', callback)

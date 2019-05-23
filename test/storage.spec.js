@@ -33,4 +33,4 @@ describe('añadir img', () => {
       done()
     })
   })
-})
+}) 
