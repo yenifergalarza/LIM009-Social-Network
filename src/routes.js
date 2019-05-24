@@ -17,15 +17,15 @@ const changeRoute = (hash) => {
       return mainSection.appendChild(components.register());
     };
     case '#/content': {
-     activeUser( () => { 
-      if(currentUser()){ 
+      activeUser(() => {
+        if (currentUser()) {
 
-        getRealTimePost(posts => { 
-          mainSection.innerHTML = ''
-          return mainSection.appendChild(components.content(posts));
-        })
-      }
-      }) 
+          getRealTimePost(posts => {
+            mainSection.innerHTML = ''
+            return mainSection.appendChild(components.content(posts));
+          })
+        }
+      })
     };
     // default:
     //   return mainSection.appendChild(components.different());

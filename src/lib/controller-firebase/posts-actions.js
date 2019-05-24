@@ -24,13 +24,13 @@ export const addComment = (input, userName, uid, postFatherId) => {
   })
 }
 
-export const getRealTimeComment = (postFatherId, cb)=> {
-  const firestore =  firebase.firestore();
+export const getRealTimeComment = (postFatherId, cb) => {
+  const firestore = firebase.firestore();
   const allComments = firestore.collection('posts').doc(postFatherId).collection('comments').orderBy('date', 'desc')
   allComments.onSnapshot(snapshot => {
     const comment = [];
-    snapshot.forEach(doc=> {
-      comment.push({id: doc.id, doc: doc.data()})
+    snapshot.forEach(doc => {
+      comment.push({ id: doc.id, doc: doc.data() })
     })
     cb(comment)
   })

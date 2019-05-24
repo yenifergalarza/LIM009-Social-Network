@@ -26,7 +26,7 @@ export const Register = () => {
 
   const nameSignin = div.querySelector('#name-signin');
   const buttonRegisterEmail = div.querySelector('#button-register');
-  buttonRegisterEmail.addEventListener('click', ()=> register(nameSignin))
-  
+  buttonRegisterEmail.addEventListener('click', () => register(nameSignin))
+
   return div
 };

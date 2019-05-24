@@ -1,5 +1,5 @@
 import { signOutUser } from '../lib/view-controllers/auth.js';
-import { getUser, getImage, addNewPost} from '../lib/view-controllers/posts.js';
+import { getUser, getImage, addNewPost } from '../lib/view-controllers/posts.js';
 import { updateUserDataName } from '../lib/view-controllers/user-profile.js';
 import { currentUser } from '../lib/controller-firebase/auth.js';
 import { listPosts } from './posts.js'
@@ -19,18 +19,18 @@ const userSection = (myData) => {
       <div class="button-pencil click button-icon" class="hide" id="changeName"> </div>   
   `;
 
-    const buttonActionChange = div.querySelector('#changeName');
-    const nameNeedChange = div.querySelector('#nameNeedChange')
-    const inputNewName = div.querySelector("#inputName");
-    
-    buttonActionChange.addEventListener('click', () => {
-      inputNewName.classList.toggle('hide');
-      if (inputNewName.value !== "") {
-        updateUserDataName(myData, inputNewName.value);
-      };
-      nameNeedChange.classList.toggle('hide');
-    })
-    return div
+  const buttonActionChange = div.querySelector('#changeName');
+  const nameNeedChange = div.querySelector('#nameNeedChange')
+  const inputNewName = div.querySelector("#inputName");
+
+  buttonActionChange.addEventListener('click', () => {
+    inputNewName.classList.toggle('hide');
+    if (inputNewName.value !== "") {
+      updateUserDataName(myData, inputNewName.value);
+    };
+    nameNeedChange.classList.toggle('hide');
+  })
+  return div
 }
 
 export const Content = (posts) => {
@@ -106,7 +106,7 @@ export const Content = (posts) => {
 
   buttonLogOut.addEventListener('click', signOutUser)
   getUser((myData) => {
-    printinfo.appendChild(userSection(myData)) 
+    printinfo.appendChild(userSection(myData))
   });
 
   add.addEventListener('click', () => {

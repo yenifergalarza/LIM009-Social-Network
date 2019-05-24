@@ -31,6 +31,6 @@ export const deleteComments = (comment) => {
 export const editComments = (comment, input) => {
   console.log(comment)
   if (currentUser().uid === comment.doc.uid) {
-    editComment(comment.doc.postId, comment.id,  input)
+    editComment(comment.doc.postId, comment.id, input)
   }
 }

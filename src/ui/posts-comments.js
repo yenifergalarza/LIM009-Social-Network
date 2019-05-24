@@ -1,4 +1,4 @@
-import {deleteComments, editComments } from '../lib/view-controllers/posts-actions.js';
+import { deleteComments, editComments } from '../lib/view-controllers/posts-actions.js';
 
 export const listComments = (comment) => {
   const div = document.createElement('div')

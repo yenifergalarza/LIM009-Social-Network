@@ -84,9 +84,7 @@ const fixtureData = {
   }
 };
 
-global.firebase = new MockFirebase(fixtureData, {
-  isNaiveSnapshotListenerEnabled: true
-});
+global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
 describe('getUserData', () => {
   it('deberia capturar la data del usuario activi', (done) => {
@@ -112,7 +110,7 @@ describe('getUserData', () => {
       'photoURL': null,
       'uid': 'abcXXX123'
     }
-    return getUserData(user,'jun').then(() => {
+    return getUserData(user, 'jun').then(() => {
       const callback = (doc) => {
         const data = doc.data()
         expect(data.email).toEqual('yeni333@gmail.com')
@@ -142,10 +140,10 @@ describe('editar post', () => {
   it('deberia retornar nuevo post: quiero dormir', (done) => {
     return editPost('234567', 'quiero dormir')
       .then(() => {
-        const callback = (notes) => { 
+        const callback = (notes) => {
           const result = notes.filter((note) => {
-          return note.id === '234567';
-        })
+            return note.id === '234567';
+          })
           expect(result[0]['doc'].post).toEqual('quiero dormir')
           done()
         }
